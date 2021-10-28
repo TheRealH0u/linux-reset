@@ -34,3 +34,11 @@ Repository to download important files for a new linux system.
     └ plaintext.txt
 ## Linux installation script
 The script just installs all the important programms that I might find immportant.
+To run the script please use the commands bellow
+```
+chmod +x new-linux.sh
+```
+```
+bash new-linux.sh
+```
+And then just follow the steps on the screen.
