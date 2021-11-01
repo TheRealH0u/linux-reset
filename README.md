@@ -32,7 +32,7 @@ Repository to download important files for a new linux system.
         └ php.php
         └ xml.xml
     └ plaintext.txt
-## Linux installation script
+## linux-reset.sh
 The script just installs all the important programms that I might find immportant.
 To run the script please use the commands bellow
 ```
