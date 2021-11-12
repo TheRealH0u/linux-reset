@@ -1,0 +1,36 @@
+{
+    "programs":[
+        {
+            "name": "pff-tools",
+            "install":"sudo apt install pff-tools -y"
+        },
+        {
+            "name": "vim",
+            "install":"sudo apt install vim"
+        },
+        {
+            "name": "git",
+            "install":"sudo apt install git"
+        },
+        {
+            "name": "docker",
+            "install":"sudo apt install docker"
+        },
+        {
+            "name": "docker-compose",
+            "install":"sudo apt install docker-compose"
+        },
+        {
+            "name": "gcc",
+            "install":"sudo apt install gcc"
+        },
+        {
+            "name": "g++",
+            "install":"sudo apt install g++"
+        },
+        {
+            "name": "gdb",
+            "install":"sudo apt install gdb"
+        }
+    ]
+}
