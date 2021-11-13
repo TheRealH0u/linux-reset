@@ -1,6 +1,8 @@
 # linux-reset
 Repository to download important files for a new linux system.
 
+[a = \textsf{glavnica} \cdot q^{n-1} \frac{1-q}{1-q^n}\textrm{, }]
+
 ## Templates
     └ office
         └ document.odt
