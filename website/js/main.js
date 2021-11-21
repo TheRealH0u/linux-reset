@@ -1,9 +1,3 @@
-/*
-<div class="form-check form-switch form-secondary">
-    <input class="form-check-input" type="checkbox" id="pff-tools">
-    <label class="form-check-label" for="pff-tools">pff-tools</label>
-</div>
-*/
 $(document).ready(function () {
     console.log("Page ready!");
     $.getJSON('json/data.json', function (data) {
