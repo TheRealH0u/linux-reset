@@ -1,36 +1,59 @@
 {
-    "programs":[
+    "programs": [
         {
+            "id": "pfftools",
             "name": "pff-tools",
-            "install":"sudo apt install pff-tools -y"
+            "install": "sudo apt install pff-tools -y"
         },
         {
+            "id": "vim",
             "name": "vim",
-            "install":"sudo apt install vim"
+            "install": "sudo apt install vim"
         },
         {
+            "id": "git",
             "name": "git",
-            "install":"sudo apt install git"
+            "install": "sudo apt install git"
         },
         {
+            "id": "docker",
             "name": "docker",
-            "install":"sudo apt install docker"
+            "install": "sudo apt install docker"
         },
         {
+            "id": "docker-compose",
             "name": "docker-compose",
-            "install":"sudo apt install docker-compose"
+            "install": "sudo apt install docker-compose"
         },
         {
+            "id": "gcc",
             "name": "gcc",
-            "install":"sudo apt install gcc"
+            "install": "sudo apt install gcc"
         },
         {
+            "id": "gpp",
             "name": "g++",
-            "install":"sudo apt install g++"
+            "install": "sudo apt install g++"
         },
         {
+            "id": "gdb",
             "name": "gdb",
-            "install":"sudo apt install gdb"
+            "install": "sudo apt install gdb"
+        },
+        {
+            "id": "ltrace",
+            "name": "ltrace",
+            "install": "sudo apt install ltrace"
+        },
+        {
+            "id": "strace",
+            "name": "strace",
+            "install": "sudo apt install strace"
+        },
+        {
+            "id": "dnspy",
+            "name": "dnSpy",
+            "install": "github bitch"
         }
     ]
 }

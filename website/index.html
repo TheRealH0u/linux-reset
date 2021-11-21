@@ -20,6 +20,9 @@
 <body>
     <div id="container">
         <h1 id="header">Linux Installation Script Generator</h1>
+            <div id="main">
+                <p>Installation directory:</p>
+            </div>
         <div id="div-container">
             <div id="left-div">
                 <div class="d-flex align-items-start">
@@ -55,7 +58,9 @@
                 </div>
             </div>
             <div id="right-div">
-
+                <div id="script-container">
+                    <textarea onkeyup="textAreaAdjust(this)" id="script">#!/bin/bash</textarea>
+                </div>
             </div>
         </div>
 

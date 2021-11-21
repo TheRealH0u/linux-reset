@@ -4,28 +4,29 @@
     <label class="form-check-label" for="pff-tools">pff-tools</label>
 </div>
 */
-$( document ).ready(function() {
-    console.log( "Page ready!" );
+$(document).ready(function () {
+    console.log("Page ready!");
     $.getJSON('json/data.json', function (data) {
-        $.each(data.programs, function(i, v) {
+        $.each(data.programs, function (i, v) {
             $("#v-pills-programs").append(
-                '<div class="form-check form-switch form-secondary"><input onchange="programsBox()" class="form-check-input programs" type="checkbox" name="programs" id="'+v.name+'"><label class="form-check-label" for="'+v.name+'">'+v.name+'</label></div>'
+                '<div class="form-check form-switch form-secondary"><input class="form-check-input programs" type="checkbox" name="programs" id="' + v.id + '"><label class="form-check-label" for="' + v.id + '">' + v.name + '</label></div>'
             );
-            $("#"+v.name).data("install", v.install);
+            $("#" + v.id).data("install", v.install);
         });
     });
-    $("#v-pills-programs .form-check :checkbox").change(function () {
-        if ($(this).is(":checked"))
-            console.log("checked Score: " + $(this).data("install"));
-        else
-            console.log("not checked Score: " + $(this).data("install"));
-    });
 });
-function programsBox(){
-    $("#v-pills-programs .form-check :checkbox").change(function () {
-        if ($(this).is(":checked"))
-            console.log("checked Score: " + $(this).data("install"));
-        else
-            console.log("not checked Score: " + $(this).data("install"));
-    });
-};
+$(document).on('click', '.programs', function (e) {
+    if ($(this).is(":checked")) {
+        $("#script").text($("#script").text() + "\n" + $(this).data("install"));
+    }
+    else {
+        $("#script").text($("#script").text().replace("\n"+$(this).data("install"), ""));
+    }
+    document.querySelector("#script").style.height = "1px";
+    document.querySelector("#script").style.height = (25+document.querySelector("#script").scrollHeight)+"px";
+});
+
+function textAreaAdjust(element) {
+    element.style.height = "1px";
+    element.style.height = (25+element.scrollHeight)+"px";
+  }
