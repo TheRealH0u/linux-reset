@@ -27,7 +27,7 @@ tools(){
 		echo -e "\n\033[1mVolatility3 installed\033[0m"
 	# TOR BROWSER
 		echo -e "\n\033[1mInstalling Tor browser\033[0m"
-		sudo curl https://dist.torproject.org/torbrowser/10.5.10/tor-browser-linux64-10.5.10_en-US.tar.xz --output $dir/Tools/tor-browser.tar.xz
+		curl https://dist.torproject.org/torbrowser/10.5.10/tor-browser-linux64-10.5.10_en-US.tar.xz --output $dir/Tools/tor-browser.tar.xz
 		mkdir $dir/Tools/Tor
 		echo -e "\n\033[1m- - - EXTRACTING DO NOT EXIT - - -\033[0m"
 		tar -xf $dir/Tools/tor-browser.tar.xz -C $dir/Tools/Tor --strip-components 1

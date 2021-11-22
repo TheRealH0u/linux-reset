@@ -1,8 +1,8 @@
-body{
+body {
     background-color: #222222 !important;
 }
 
-#container{
+#container {
     color: white;
     background-color: #222222;
     border-radius: 15px;
@@ -13,23 +13,26 @@ body{
     height: 100%;
     font-family: Consolas, monaco, monospace;
 }
-#header{
+
+#header {
     text-align: center;
     padding: 10px;
 }
 
-#div-container{
+#div-container {
     display: flex;
 }
 
-#main{
+#main {
+    font-size: 20px;
     padding: 20px;
     box-shadow: 10px 0px 40px 0px #0d0d0d;
     margin: 10px;
     background-color: #292929;
 }
 
-#left-div,#right-div{
+.left-div,
+.right-div {
     width: 100%;
     padding: 20px;
     box-shadow: 10px 0px 40px 0px #0d0d0d;
@@ -37,18 +40,21 @@ body{
     background-color: #292929;
 }
 
-#v-pills-programs, #v-pills-services, #v-pills-tools, #v-pills-miscs{
+#v-pills-programs,
+#v-pills-services,
+#v-pills-tools,
+#v-pills-miscs {
     padding: 20px 0px 20px 20px;
     border-left: 1px solid grey;
 }
 
-#script-container{
+#script-container {
     box-shadow: 10px 0px 40px 0px black;
     padding: 20px;
     border-radius: 15px;
 }
 
-#script{
+#script {
     width: 100%;
     color: white;
     background-color: #292929;
@@ -56,4 +62,12 @@ body{
     padding: 10px;
     min-height: 100px;
     overflow: hidden;
+}
+
+#dir-input {
+    width: 40%;
+}
+
+#device {
+    display: none;
 }

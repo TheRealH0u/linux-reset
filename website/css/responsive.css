@@ -1,11 +1,24 @@
 @media only screen and (max-width: 1000px) {
-    #container{
+    #container {
         margin: 0px 5px 0px 5px;
     }
-    #div-container{
+    #div-container {
         display: block;
     }
-    #left-div,#right-div{
+    .left-div,
+    .right-div {
         width: auto;
     }
-  }
+    #dir-input {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .left-div .d-flex .nav button {
+        font-size: 12px;
+    }
+    #v-pills-tools p {
+        font-size: 10px;
+    }
+}

@@ -256,4 +256,6 @@ fi
 alias alert="notify-send -u low --icon=/usr/share/icons/Flat-Remix-Blue-Dark/status/scalable/512/dialog-warning.svg "ALERT""
 alias beep="paplay /usr/share/sounds/freedesktop/stereo/complete.oga"
 alias mytools="cd /home/hou/Tools"
-alias here="thunar"
+
+# Created by `userpath` on 2021-11-17 20:51:17
+export PATH="$PATH:/home/hou/.local/bin"
