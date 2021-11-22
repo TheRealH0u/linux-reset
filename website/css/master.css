@@ -1,0 +1,59 @@
+body{
+    background-color: #222222 !important;
+}
+
+#container{
+    color: white;
+    background-color: #222222;
+    border-radius: 15px;
+    border: solid #222222 1px;
+    padding: 10px;
+    box-shadow: 10px 0px 40px 0px #0d0d0d;
+    margin: 0px 10% 0px 10%;
+    height: 100%;
+    font-family: Consolas, monaco, monospace;
+}
+#header{
+    text-align: center;
+    padding: 10px;
+}
+
+#div-container{
+    display: flex;
+}
+
+#main{
+    padding: 20px;
+    box-shadow: 10px 0px 40px 0px #0d0d0d;
+    margin: 10px;
+    background-color: #292929;
+}
+
+#left-div,#right-div{
+    width: 100%;
+    padding: 20px;
+    box-shadow: 10px 0px 40px 0px #0d0d0d;
+    margin: 10px;
+    background-color: #292929;
+}
+
+#v-pills-programs, #v-pills-services, #v-pills-tools, #v-pills-miscs{
+    padding: 20px 0px 20px 20px;
+    border-left: 1px solid grey;
+}
+
+#script-container{
+    box-shadow: 10px 0px 40px 0px black;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+#script{
+    width: 100%;
+    color: white;
+    background-color: #292929;
+    border: solid #0d6efd;
+    padding: 10px;
+    min-height: 100px;
+    overflow: hidden;
+}
