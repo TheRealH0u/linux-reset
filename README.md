@@ -105,6 +105,7 @@ Repository to download important files for a new linux system.
 | | |
 |-|-|
 |mimikatz|mimikatz is a tool I've made to learn C and make somes experiments with Windows security.|
+|PEASS-ng|Tool to search for possible local privilege escalation paths that you could exploit and print them to you with nice colors so you can recognize the misconfigurations easily.|
 ### APK
 | | |
 |-|-|
