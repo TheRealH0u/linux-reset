@@ -77,6 +77,7 @@ Repository to download important files for a new linux system.
 |-|-|
 |pyinstaller|PyInstaller Extractor is a Python script to extract the contents of a PyInstaller generated Windows executable file. The contents of the pyz file (usually pyc files) present inside the executable are also extracted.|
 |decompyle++|Decompyle++ aims to translate compiled Python byte-code back into valid and human-readable Python source code. While other projects have achieved this with varied success, Decompyle++ is unique in that it seeks to support byte-code from any version of Python.|
+|Ghidra|A software reverse engineering (SRE) suite of tools developed by NSA's Research Directorate in support of the Cybersecurity mission.|
 ### Information Gathering
 | | |
 |-|-|
