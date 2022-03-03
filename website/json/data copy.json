@@ -1,0 +1,117 @@
+{
+    "programs": [{
+            "name": "Forensics",
+            "programs": [{
+                "id": "pfftools",
+                "name": "pff-tools",
+                "install": "sudo apt install pff-tools -y"
+            }]
+        },
+        {
+            "name": "Reversing",
+            "programs": [{
+                    "id": "gdb",
+                    "name": "gdb",
+                    "install": "sudo apt install gdb"
+                },
+                {
+                    "id": "ltrace",
+                    "name": "ltrace",
+                    "install": "sudo apt install ltrace"
+                },
+                {
+                    "id": "strace",
+                    "name": "strace",
+                    "install": "sudo apt install strace"
+                }
+            ]
+        }, {
+            "name": "Editors",
+            "programs": [{
+                "id": "vim",
+                "name": "vim",
+                "install": "sudo apt install vim"
+            }]
+        }, {
+            "name": "Programming",
+            "programs": [{
+                    "id": "git",
+                    "name": "git",
+                    "install": "sudo apt install git"
+                },
+                {
+                    "id": "docker",
+                    "name": "docker",
+                    "install": "sudo apt install docker"
+                },
+                {
+                    "id": "docker-compose",
+                    "name": "docker-compose",
+                    "install": "sudo apt install docker-compose"
+                },
+                {
+                    "id": "gcc",
+                    "name": "gcc",
+                    "install": "sudo apt install gcc"
+                },
+                {
+                    "id": "gpp",
+                    "name": "g++",
+                    "install": "sudo apt install g++"
+                }
+            ]
+        }
+    ],
+    "services": [{
+        "name": "Anonymity",
+        "programs": [{
+            "id": "tor",
+            "name": "tor",
+            "install": "sudo apt install tor"
+        }]
+    }],
+    "tools": [{
+        "name": "Tools Directory",
+        "programs": [{
+            "id": "mkdir",
+            "name": "Tools Directory",
+            "install": "mkdir $dir/Tools"
+        }]
+    }, {
+        "name": "Forensics",
+        "programs": [{
+            "id": "volatility",
+            "name": "volatility3",
+            "install": "git clone https://github.com/volatilityfoundation/volatility3.git $dir/Tools/Volatility3"
+        }]
+    }, {
+        "name": "Anonymity",
+        "programs": [{
+            "id": "tor-browser",
+            "name": "tor-browser",
+            "install": "curl https://dist.torproject.org/torbrowser/10.5.10/tor-browser-linux64-10.5.10_en-US.tar.xz --output $dir/Tools/tor-browser.tar.xz && mkdir $dir/Tools/Tor && tar -xf $dir/Tools/tor-browser.tar.xz -C $dir/Tools/Tor --strip-components 1 && rm $dir/Tools/tor-browser.tar.xz"
+        }]
+    }],
+    "miscs": [{
+        "name": "My zsh",
+        "programs": [{
+            "id": "zsh-1",
+            "name": "zsh-1",
+            "install": "rm $dir/.zshrc && curl https://raw.githubusercontent.com/TheRealH0u/linux-reset/main/zshrc --output $dir/.zshrc"
+        }]
+    }, {
+        "name": "Templates",
+        "programs": [{
+            "id": "templates-1",
+            "name": "templates-1",
+            "install": "rm $dir/Templates && git clone https://github.com/TheRealH0u/Templates.git $dir/Templates"
+        }]
+    }, {
+        "name": "Forensics",
+        "programs": [{
+            "id": "dnSpy",
+            "name": "dnSpy",
+            "install": "#dnSpy unfortunately cannot be installed because it can only be used on Windows. https://github.com/dnSpy/dnSpy"
+        }]
+    }]
+}
