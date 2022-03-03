@@ -26,7 +26,6 @@
 
 # linux-reset
 Repository to download important files for a new linux system.
-
 ## Programs
 ### Forensics
 | | |
@@ -87,6 +86,7 @@ Repository to download important files for a new linux system.
 | | |
 |-|-|
 |JWT_Tool|JWT_Tool is a toolkit for validating, forging, scanning and tampering JWTs (JSON Web Tokens).|
+|ippsec-cli|This a simple tool to query the awesome ippsec.rocks website from your terminal|
 ### Crypto
 | | |
 |-|-|
