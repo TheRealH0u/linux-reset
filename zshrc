@@ -256,10 +256,3 @@ fi
 alias alert="notify-send -u low --icon=/usr/share/icons/Flat-Remix-Blue-Dark/status/scalable/512/dialog-warning.svg "ALERT""
 alias beep="paplay /usr/share/sounds/freedesktop/stereo/complete.oga"
 alias mytools="cd /home/hou/Tools"
-
-# Created by `userpath` on 2021-11-17 20:51:17
-<<<<<<< HEAD
-export PATH="$PATH:/home/hou/.local/bin"
-=======
-export PATH="$PATH:/home/hou/.local/bin"
->>>>>>> 62bcc5fb8a3c6c2fb3ed470da1b612721146d7b1
