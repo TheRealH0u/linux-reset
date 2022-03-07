@@ -98,7 +98,7 @@ def addTool(data, categoryIndex, tabName):
 def main():
     while True:
         global path
-        with open('website/json/data.json') as f:
+        with open('../website/json/data.json') as f:
             data = json.load(f)
 
             tabs = getTabs(data)
@@ -107,12 +107,12 @@ def main():
             categoryIndex = addOrChoseCategory(data, tabName)
             if categoryIndex == 99:
                 data = addNewCategory(data, tabName)
-                with open('website/json/data.json', 'w') as write:
+                with open('../website/json/data.json', 'w') as write:
                     json.dump(data, write)
             else:
                 path += "/"+data[tabName][categoryIndex]["name"]
                 data = addTool(data, categoryIndex, tabName)
-                with open('website/json/data.json', 'w') as write:
+                with open('../website/json/data.json', 'w') as write:
                     json.dump(data, write)
                 choice = input("[Add one more (y/N)]=>")
                 if choice in ["y", "Y"]:

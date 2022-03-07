@@ -1,7 +1,7 @@
 import json
 import os
 
-with open('website/json/data.json') as f:
+with open('../website/json/data.json') as f:
     json_data = json.load(f)
     output_data = {
         "programs": [],
@@ -22,5 +22,5 @@ with open('website/json/data.json') as f:
             output_data[tab][c]["programs"] = sorted_data
             c+=1
 
-with open("newfile.json", "w") as f:
+with open("../website/json/data.json", "w") as f:
     json.dump(output_data, f)

@@ -4,7 +4,7 @@ import os
 README = ""
 tableOfContents = ""
 
-with open('website/json/data.json') as f:
+with open('../website/json/data.json') as f:
     data = json.load(f)
 
     README += "# linux-reset\n"
@@ -29,9 +29,9 @@ with open('website/json/data.json') as f:
             for program in category["programs"]:
                 README += "|"+program["name"]+"|"+program["description"]+"|\n"
 try:
-    os.system("touch README.md")
+    os.system("touch ../README.md")
 except:
     pass
 
-with open("README.md", "w") as f:
+with open("../README.md", "w") as f:
     f.write(tableOfContents+"\n"+README)
