@@ -7,13 +7,13 @@ $j(document).ready(function() {
                 $j("#v-pills-" + itemName).append('<hr style="margin: 5px 0"><span style="margin-bottom: 10px" class="badge bg-primary">' + category.name + '</span>');
                 $j.each(category.programs, function(i, v) {
                     $j("#v-pills-" + itemName).append(
-                        '<div class="form-check form-switch form-secondary"><input class="form-check-input ' + itemName + '" type="checkbox" name="' + itemName + '" id="' + v.id + '"><label class="form-check-label" for="' + v.id + '">' + v.name + '</label>&nbsp;<label tabindex="0" class="far fa-question-circle" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="' + v.name + '" data-bs-content="' + v.description + '"></label></div>'
+                        '<div class="form-check form-switch form-secondary"><input class="form-check-input ' + itemName + '" type="checkbox" name="' + itemName + '" id="' + v.id + '"><label class="form-check-label" for="' + v.id + '">' + v.name + '</label>&nbsp;<label tabindex="0" class="far fa-question-circle" role="button" data-bs-toggle="popover" data-bs-trigger="hover" title="' + v.name + '" data-bs-content="' + v.description + '"></label></div>'
                     ); //data-toogle="tooltip" title="awd" data-bs-trigger="focus"
                     $j("#" + v.id).data("install", v.install);
                 });
                 var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
                 popoverTriggerList.map(function(popoverTriggerEl) {
-                    return new bootstrap.Popover(popoverTriggerEl, { trigger: 'focus' })
+                    return new bootstrap.Popover(popoverTriggerEl, { trigger: 'hover' })
                 })
                 console.log("loaded");
             });
@@ -31,8 +31,8 @@ $j(document).on('click', '.programs, .services, .tools, .miscs', function(e) {
     document.querySelector("#script").style.height = (25 + document.querySelector("#script").scrollHeight) + "px";
 });
 
-$j(document).on('focusout', '.dir', function() {
-    $j("#script").text($j("#script").text().replace(/\$jdir=(.*)/g, "$jdir=/home/" + $j(".dir").val()));
+$j(document).on('focusout', '#directoryName', function() {
+    $j("#script").text($j("#script").text().replace(/\$dir=(.*)/g, "$dir=/home/" + $j(".dir").val()));
 })
 
 function textAreaAdjust(element) {
