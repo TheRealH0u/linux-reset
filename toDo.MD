@@ -1,2 +1,2 @@
 binwalk, foremost, burpsuite, steghide, exiftool, sonicvisualiser, audacity, nmap, dive, sqlmap, wpscan, gobuster, searchsploit, impacket, sagemath, ffuf, sherlock, apktool, genymotion, virutalbox, sshuttle, stegoveritas, openstego, evil-winrm, GitTools, PadBuster, john, powershell, gimp, inkscape, flameshot, remmina, wireshark, ranger, htop, youtube-dl, redshift, radare2, socat, tmux, z3, stegseek, pdfcrack, fcrackzip, random chinese spyware, zsteg, hashcat, pspy, wine, chisel, nautilus, hashPump, rsa-wiener-attack, stegsolve, ctf-usb-keyboard-parser, TLS-Attacker, stegsolve, rsa-wiener-attack, lynx, spoofcheck, sslstrip, IIS-ShortName-Scanner, autoVolatility, HashPump, 
-FinalRecon
+FinalRecon, albert
