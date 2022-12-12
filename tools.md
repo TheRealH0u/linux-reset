@@ -28,6 +28,7 @@
   - albert
   - python3-scrapy
   - python3-pwntools
+  - seclists
 
 - gem
   - zsteg
@@ -80,6 +81,7 @@
   - Attacks
     - https://github.com/commixproject/commix.git
     - https://github.com/Hex27/mongomap.git
+    - https://github.com/nicholasaleks/CrackQL.git
   - Cookies
     - https://github.com/ticarpi/jwt_tool.git
   - Crawler

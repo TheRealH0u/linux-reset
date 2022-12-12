@@ -1,9 +1,8 @@
 #! /bin/bash
 
 sudo apt update
-sudo apt install -y python3-scrapy python3-pwntools pff-tools docker docker-compose g++ gcc gdb ltrace strace foremost steghide exiftool dive sshuttle gimp inkscape flameshot remmina ranger htop redshift pdfcrack fcrackzip libwine pdf-parser lynx golang-go albert
+sudo apt install -y python3-scrapy python3-pwntools pff-tools docker docker-compose g++ gcc gdb ltrace strace foremost steghide exiftool dive sshuttle gimp inkscape flameshot remmina ranger htop redshift pdfcrack fcrackzip libwine pdf-parser lynx golang-go albert seclists
 sudo gem install zsteg
-
 TEMP_DEB="$(mktemp)" &&
 wget -O "$TEMP_DEB" 'https://code.soundsoftware.ac.uk/attachments/download/2822/sonic-visualiser_4.5_amd64.deb' &&
 sudo dpkg -i "$TEMP_DEB"
@@ -66,6 +65,7 @@ mkdir $TOOLS/web/attacks
 git -C $TOOLS/web/attacks clone https://github.com/commixproject/commix.git
 git -C $TOOLS/web/attacks clone https://github.com/Hex27/mongomap.git
 git -C $TOOLS/web/attacks clone https://github.com/s0md3v/XSStrike.git
+git -C $TOOLS/web/attacks clone https://github.com/nicholasaleks/CrackQL.git
 # Web-Cookies
 mkdir $TOOLS/web/cookies
 git -C $TOOLS/web/cookies clone https://github.com/ticarpi/jwt_tool.git
