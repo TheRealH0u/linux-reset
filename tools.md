@@ -122,3 +122,7 @@
   - BruteForce
     - https://github.com/RickdeJager/stegseek.git
   - https://github.com/zardus/ctf-tools/blob/master/stegsolve/install
+ 
+- Sniffing and Spoofing
+  - MITM
+    - https://github.com/lgandx/Responder.git
