@@ -91,15 +91,48 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+## My functions to get IPs
+# Function to get the IP address of an interface
+# Function to get the IP addresses of all ethX and wlanX interfaces
+declare -A addresses
+
+get_ips() {
+    local interface=""
+    local ips=""
+    for interface in $(ip -o -4 addr show | awk '/(eth|wlan)[0-9]+/ {print $2}' | cut -d':' -f1); do
+        local ipo=""
+        ipo=$(ip -o -4 addr show "$interface" 2>/dev/null | awk '{print $4}' | cut -d'/' -f1)
+        if [ -n "$ipo" ]; then
+            ips="$ips"$'%b%F{%(#.blue.green)}[%B%F{reset}'"$interface $ipo"$'%b%F{%(#.blue.green)}]%B%F{reset}'
+            addresses[$interface]=$ipo
+        fi
+    done
+    echo "$ips"
+}
+# Function to get the global IP
+get_global_ip() {
+    local ipc
+    ipc=$(curl -s -m 2 ifconfig.me)
+    if [ -n "$ipc" ]; then
+        echo $'%b%F{%(#.blue.green)}[%B%F{reset}'"global $ipc"$'%b%F{%(#.blue.green)}]%B%F{reset}'
+        addresses[global]=$ipc
+    else
+        echo ""
+    fi
+}
+
 configure_prompt() {
-    prompt_symbol=㉿
+    prompt_symbol=💻
+    local global_ip=$(get_global_ip)
+    local ips=$(get_ips)
+    local prompt_ips="addresses: ${global_ip}${ips}"
     # Skull emoji for root terminal
     [ "$EUID" -eq 0 ] && prompt_symbol=💀
     case "$PROMPT_ALTERNATIVE" in
         twoline)
-            PROMPT=$'%F{%(#.blue.green)}┌──${debian_chroot:+($debian_chroot)─}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))─}(%B%F{%(#)}%n'$prompt_symbol$'%m%b%F{%(#.blue.green)})-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.green)}]\n└─%B%(#.%F{red}#.%F{green}$)%b%F{reset} '
+            PROMPT=$'%F{%(#.blue.green)}┌──${debian_chroot:+($debian_chroot)─}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))─}(%B%F{%(#.red.blue)}%n'$prompt_symbol$'%m%b%F{%(#.blue.green)})-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.green)}]\n└─%B%(#.%F{red}#.%F{blue}$)%b%F{reset} '
             # Right-side prompt with exit codes and background processes
-            RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
+            RPROMPT=$prompt_ips$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
             ;;
         oneline)
             PROMPT=$'${debian_chroot:+($debian_chroot)}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%B%F{%(#)}%n@%m%b%F{reset}:%B%F{%(#.blue.green)}%~%b%F{reset}%(#.#.$) '
@@ -260,7 +293,42 @@ fi
 # custom aliases
 # Make beep count like beep 100 and it will beep 100 times
 
-alias alert="notify-send -u low --icon=/usr/share/icons/Flat-Remix-Blue-Dark/status/scalable/512/dialog-warning.svg "ALERT""
+
+# Variable to store the last created directory
+LAST_HACKING_DIR=""
+
+# Function to enter hacking mode
+hacking() {
+    # If no argument is provided, go back to the last created directory
+    if [ -z "$1" ]; then
+        if [ -n "$LAST_HACKING_DIR" ]; then
+            cd "$LAST_HACKING_DIR"
+        else
+            echo "No previous hacking directory."
+        fi
+    else
+        # Get the base name of the argument
+        BASENAME=$(basename "$1")
+
+        # Create a temporary directory in /tmp based on the basename
+        HACKING_DIR=$(mktemp -d "/tmp/hacking_${BASENAME}_XXXXXX")
+
+        # Copy the argument (directory or file) to the temporary directory
+        cp -r "$1" "$HACKING_DIR"
+
+        # Move into the temporary directory
+        cd "$HACKING_DIR"
+
+        # Set LAST_HACKING_DIR to the current directory
+        LAST_HACKING_DIR="$HACKING_DIR"
+
+        echo "Entered hacking mode. Current directory: $HACKING_DIR"
+    fi
+}
+
+alert() {             
+    notify-send -u low --icon=/usr/share/icons/Flat-Remix-Blue-Dark/status/scalable/512/status.svg "ALERT" "$1" && paplay /usr/share/sounds/freedesktop/stereo/complete.oga
+}
 alias beep="paplay /usr/share/sounds/freedesktop/stereo/complete.oga"
 alias tools="cd $HOME/Tools"
 

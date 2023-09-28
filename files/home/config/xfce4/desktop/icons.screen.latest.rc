@@ -1,1 +1,15 @@
-/home/kali/.config/xfce4/desktop/icons.screen0-1904x1029.rc
+[xfdesktop-version-4.10.3+-rcfile_format]
+4.10.3+=true
+
+[Trash]
+row=0
+col=0
+
+[/]
+row=1
+col=0
+
+[/home/kali]
+row=2
+col=0
+
