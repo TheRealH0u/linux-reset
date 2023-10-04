@@ -96,43 +96,67 @@ fi
 # Function to get the IP addresses of all ethX and wlanX interfaces
 declare -A addresses
 
-get_ips() {
+fill_addresses(){
+    local ipc
+    ipc=$(curl -s -m 2 ifconfig.me)
+    if [ -n "$ipc" ]; then
+        addresses[global]=$ipc
+    else
+        global_ip=""
+    fi
+
     local interface=""
     local ips=""
     for interface in $(ip -o -4 addr show | awk '/(eth|wlan)[0-9]+/ {print $2}' | cut -d':' -f1); do
         local ipo=""
         ipo=$(ip -o -4 addr show "$interface" 2>/dev/null | awk '{print $4}' | cut -d'/' -f1)
+        #echo "$ipo"
         if [ -n "$ipo" ]; then
-            ips="$ips"$'%b%F{%(#.blue.green)}[%B%F{reset}'"$interface $ipo"$'%b%F{%(#.blue.green)}]%B%F{reset}'
             addresses[$interface]=$ipo
         fi
     done
-    echo "$ips"
 }
-# Function to get the global IP
-get_global_ip() {
-    local ipc
-    ipc=$(curl -s -m 2 ifconfig.me)
-    if [ -n "$ipc" ]; then
-        echo $'%b%F{%(#.blue.green)}[%B%F{reset}'"global $ipc"$'%b%F{%(#.blue.green)}]%B%F{reset}'
-        addresses[global]=$ipc
-    else
-        echo ""
-    fi
+get_ips() {
+    keys=("${(@k)addresses}")
+
+    # Iterate through the keys and values
+    for key in "${keys[@]}"; do
+        if [[ "$key" = "global" ]]; 
+        then
+            value="${addresses[$key]}"
+            global_ip=$'%b%F{%(#.red.green)}[%B%F{reset}'"global $value"$'%b%F{%(#.red.green)}]%B%F{reset}'
+        else
+            value="${addresses[$key]}"
+            ips="$ips"$'%b%F{%(#.red.green)}[%B%F{reset}'"$key $value"$'%b%F{%(#.red.green)}]%B%F{reset}'
+        fi
+    done
+    echo "addresses: $global_ip$ips"
 }
 
 configure_prompt() {
     prompt_symbol=💻
-    local global_ip=$(get_global_ip)
+    fill_addresses
     local ips=$(get_ips)
-    local prompt_ips="addresses: ${global_ip}${ips}"
+    local prompt_ips="${ips}"
+
+    local fadebar=${1:-'green'}
+    [ "$EUID" -eq 0 ] && local fadebar=${1:-'red'}
+    local userhost=${2:-'white'}
+    local date=${3:-'white'}
+    local cwd=${4:-'yellow'}
+    local -A schars
+    autoload -Uz prompt_special_chars
+    prompt_special_chars
+
     # Skull emoji for root terminal
     [ "$EUID" -eq 0 ] && prompt_symbol=💀
     case "$PROMPT_ALTERNATIVE" in
         twoline)
-            PROMPT=$'%F{%(#.blue.green)}┌──${debian_chroot:+($debian_chroot)─}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))─}(%B%F{%(#.red.blue)}%n'$prompt_symbol$'%m%b%F{%(#.blue.green)})-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.green)}]\n└─%B%(#.%F{red}#.%F{blue}$)%b%F{reset} '
+            #PROMPT=$'%F{%(#.blue.green)}┌──${debian_chroot:+($debian_chroot)─}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))─}(%B%F{}%n'$prompt_symbol$'%m%b%F{%(#.blue.green)})-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.green)}]\n└─%B%(#.%F{red}#.%F{blue}$)%b%F{reset} '
+            PROMPT=$'%B%F{'$fadebar'}'$schars[333]$schars[262]$schars[261]$schars[260]$'%B%F{'$userhost$'}%K{'$fadebar$'}%n'$prompt_symbol$'%m%b%k%f%F{'$fadebar$'}%K{black}'$schars[260]$schars[261]$schars[262]$schars[333]$'%b%f%k%F{'$fadebar$'}%K{black}'$schars[333]$schars[262]$schars[261]$schars[260]$'%B%F{'$date$'}%K{black} %D{%a %b %d} %D{%I:%M:%S%P}'$prompt_newline$'\n%B%F{'$cwd$'}%K{black}%d>%b%f%k '
             # Right-side prompt with exit codes and background processes
-            RPROMPT=$prompt_ips$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
+            RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.) '"%B%F{$fadebar}$schars[333]$schars[262]$schars[261]$schars[260]%b%F{$fadebar}%K{black} $prompt_ips $schars[260]$schars[261]$schars[262]$schars[333]%F{$fadebar}%K{black}$schars[333]$schars[262]$schars[261]$schars[260]%B%F{$fadebar}>%b%f%k "
+            #RPROMPT=$prompt_ips$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
             ;;
         oneline)
             PROMPT=$'${debian_chroot:+($debian_chroot)}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%B%F{%(#)}%n@%m%b%F{reset}:%B%F{%(#.blue.green)}%~%b%F{reset}%(#.#.$) '
@@ -150,7 +174,7 @@ configure_prompt() {
 # These delimiters must not be modified. Thanks.
 # START KALI CONFIG VARIABLES
 PROMPT_ALTERNATIVE=twoline
-NEWLINE_BEFORE_PROMPT=yes
+NEWLINE_BEFORE_PROMPT=no
 # STOP KALI CONFIG VARIABLES
 
 if [ "$color_prompt" = yes ]; then
@@ -292,13 +316,12 @@ fi
 
 # custom aliases
 # Make beep count like beep 100 and it will beep 100 times
-
+# --------------------------------------------------------- #
 
 # Variable to store the last created directory
 LAST_HACKING_DIR=""
-
-# Function to enter hacking mode
 hacking() {
+    # Function to enter hacking mode
     # If no argument is provided, go back to the last created directory
     if [ -z "$1" ]; then
         if [ -n "$LAST_HACKING_DIR" ]; then
@@ -324,6 +347,15 @@ hacking() {
 
         echo "Entered hacking mode. Current directory: $HACKING_DIR"
     fi
+}
+
+refresh_ip(){
+    # Clear addresses associative array
+    for key in ${(k)addresses}; do
+        unset "addresses[$key]"
+    done
+
+    configure_prompt
 }
 
 alert() {             
