@@ -14,10 +14,12 @@ The theme in use is [Mantissa](https://github.com/mantissa-/mantis-theme) and th
 
 ### Installation
 
-- We open up `Appearance` and add the Mantissa.zip theme and the Flat-Remix icons. We change the font to `Fira Code Medium` with font size 10.
-- Open up `Window Manager` and change the style to Mantissa.
-- Copy the contents in `files/home/config` into `~/.config` and rewrite the old files
-- Then copy `etc/profile` to `/etc/profile`
-- And finally copy `files/home/zshrc` to `~/.zshrc`
+For now the script is made only for my PC.  
+The user should be kali.  
+
+- Make the script executable: `chmod +x install.sh`
+- Run the script as root because we also override the root .zshrc file: `sudo ./install.sh`
+  > If you don't want this you can comment the last part of `install.sh` that copies the `zshrc` to `/root/.zshrc`
+- Reboot the machine `sudo reboot now`
 
 After installing the themes and the configs Kali should have a darker look.
