@@ -517,8 +517,8 @@ refresh_ip(){
     configure_prompt
 }
 
-alert() {             
-    notify-send -u low --icon=/usr/share/icons/Flat-Remix-Blue-Dark/status/scalable/512/status.svg "ALERT" "$1" && paplay /usr/share/sounds/freedesktop/stereo/complete.oga
+alert() {          
+    notify-send -u low --icon=/usr/share/icons/Flat-Remix-Blue-Dark/status/scalable/512/gtk-dialog-info.svg "ALERT" "$1" && paplay /usr/share/sounds/freedesktop/stereo/complete.oga
 }
 alias beep="paplay /usr/share/sounds/freedesktop/stereo/complete.oga"
 alias tools="cd $HOME/Tools"
