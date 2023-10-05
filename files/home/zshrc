@@ -318,35 +318,194 @@ fi
 # Make beep count like beep 100 and it will beep 100 times
 # --------------------------------------------------------- #
 
-# Variable to store the last created directory
-LAST_HACKING_DIR=""
-hacking() {
-    # Function to enter hacking mode
-    # If no argument is provided, go back to the last created directory
-    if [ -z "$1" ]; then
-        if [ -n "$LAST_HACKING_DIR" ]; then
-            cd "$LAST_HACKING_DIR"
-        else
-            echo "No previous hacking directory."
+### HACKING START
+# Define the path to the hidden file for storing hacking directories
+HACKING_DIRS_FILE="$HOME/.hacking_dirs"
+# Initialize the HACKING_DIRS array with the contents of the file, if it exists
+declare -a HACKING_DIRS
+if [[ -f $HACKING_DIRS_FILE ]]; then
+    HACKING_DIRS=($(cat "$HACKING_DIRS_FILE"))
+else
+    echo "File $HACKING_DIRS_FILE doesn't exist. Creating it."
+    touch "$HACKING_DIRS_FILE"
+fi
+# Function to validate and clean up the HACKING_DIRS array
+clean_hacking_dirs() {
+    local tmp_dir=()
+    while IFS= read -r line; do
+        tmp_dir+=("$line")
+    done < "$HACKING_DIRS_FILE"
+
+    local valid_dirs=()
+    for dir_path in "${tmp_dir[@]}"
+    do
+        if [ -d "$dir_path" ] || [ -f "$dir_path" ]; then
+            valid_dirs+=($dir_path)
         fi
-    else
-        # Get the base name of the argument
-        BASENAME=$(basename "$1")
+    done
 
-        # Create a temporary directory in /tmp based on the basename
-        HACKING_DIR=$(mktemp -d "/tmp/hacking_${BASENAME}_XXXXXX")
+    setopt nullglob
+    for dir_path in /tmp/hacking_*/;
+    do
+        if [[ ! "${valid_dirs[*]}" =~ "${dir_path}" ]]; then
+            valid_dirs+=($dir_path)
+        fi
+    done
+    unsetopt nullglob
+    
+    HACKING_DIRS=()
+    HACKING_DIRS=("${valid_dirs[@]}")
+    echo ${(j:\n:)HACKING_DIRS} > "$HACKING_DIRS_FILE"
+}
+dir_function() {
+    local _hacking_dir_name
+    local _hacking_folders=()
 
-        # Copy the argument (directory or file) to the temporary directory
-        cp -r "$1" "$HACKING_DIR"
+    # Parse options with getopts
+    while getopts "n:" opt; do
+        case $opt in
+            n)
+                _hacking_dir_name=$OPTARG
+                ;;
+            *)
+                echo "[?] Usage: hacking dir [-n name *optional] [directory1 directory2 ...]"
+                return 1
+                ;;
+        esac
+    done
 
-        # Move into the temporary directory
-        cd "$HACKING_DIR"
+    # Shift the parsed options
+    shift $((OPTIND-1))
 
-        # Set LAST_HACKING_DIR to the current directory
-        LAST_HACKING_DIR="$HACKING_DIR"
-
-        echo "Entered hacking mode. Current directory: $HACKING_DIR"
+    # If name is empty, then join the directories or use the only directory as the name
+    if [[ -z $_hacking_dir_name ]]; then
+        if (( $# > 0 )); then
+            _hacking_dir_name="${(@j:_:)@}"
+        else
+            echo "[?] Usage: hacking dir [-n name *optional] [directory1 directory2 ...]"
+            return 1
+        fi
     fi
+
+    # Create a directory in /tmp by prepending "hacking_" to the name
+    local tmp_dir="/tmp/hacking_$_hacking_dir_name"
+
+    # Check if the folder in /tmp already exists
+    if [[ -e $tmp_dir ]]; then
+        echo "[!] $tmp_dir exists. Use another name."
+        return
+    fi
+
+    # Create the directory
+    mkdir -p "$tmp_dir"
+
+    # Copy all folders/files into the tmp directory created
+    for dir_path in "$@"; do
+        if [[ -e $dir_path ]]; then
+            if [[ -d $dir_path ]]; then
+                cp -r "$dir_path" "$tmp_dir"
+                #echo "COPY FOLDER $dir_path to $tmp_dir"
+            else
+                cp "$dir_path" "$tmp_dir"
+                #echo "COPY FILE $dir_path to $tmp_dir"
+            fi
+        else
+            echo "[?] Warning: '$dir_path' does not exist and will not be copied."
+        fi
+    done
+
+    # Update the HACKING_DIRS array and file
+    clean_hacking_dirs
+    echo "[*] Hacking in $tmp_dir"
+    cd "$tmp_dir"
+    
+    # Make script folder and start script
+    mkdir "$tmp_dir/.script_log"
+    script --timing="$tmp_dir/.script_log/timming_log" "$tmp_dir/.script_log/script"
+}
+change_function() {
+    #clean_hacking_dirs
+    if (( ${#HACKING_DIRS[@]} == 0 )); then
+        echo "[!] No available hacking directories."
+    else
+        local hacking_dir_index=$1
+        if (( hacking_dir_index >= 1 && hacking_dir_index <= ${#HACKING_DIRS[@]} )); then
+            echo "[*] Changed to ${HACKING_DIRS[hacking_dir_index]}"
+            cd ${HACKING_DIRS[hacking_dir_index]}
+            script --timing="${HACKING_DIRS[hacking_dir_index]}/.script_log/timming_log" -a "${HACKING_DIRS[hacking_dir_index]}/.script_log/script"
+        else
+            if (( ${#HACKING_DIRS[@]} == 1 )); then
+                echo "[?] Use 1"
+            else
+                echo "[?] Minimum number can be 1, maximum number can be $(( ${#HACKING_DIRS[@]} ))"
+            fi
+        fi
+    fi
+}
+list_function() {
+    clean_hacking_dirs
+    if (( ${#HACKING_DIRS[@]} == 0 )); then
+        echo "[!] No available hacking directories."
+    else
+        echo "[?] Available hacking directories:"
+        for ((i=1; i <= $#HACKING_DIRS; i++)); do
+            echo "[$i] $HACKING_DIRS[$i]"
+        done
+    fi
+}
+rm_function(){
+    clean_hacking_dirs
+    local hacking_dir_index=$1
+    local removed_dir=${HACKING_DIRS[hacking_dir_index]}
+    if (( ${#HACKING_DIRS[@]} == 0 )); then
+        echo "[!] No available hacking directories."
+    else
+        rm -drf ${HACKING_DIRS[hacking_dir_index]}
+        echo "[?] Removed $removed_dir"
+    fi
+}
+hack() {
+    case $1 in
+        "dir")
+            shift
+            if [ ! -z $1 ]; then
+                dir_function "$@"
+            else
+                echo "[?] Usage: hack dir -n name dir1 *"
+            fi
+            ;;
+        "cd")
+            shift
+            if [ ! -z $1 ]; then
+                change_function "$@"
+            else
+                echo "[?] Usage: hack cd N"
+            fi
+            ;;
+        "list")
+            list_function
+            ;;
+        "rm")
+            shift
+            if [ ! -z $1 ]; then
+                rm_function "$@"
+            else
+                echo "[?] Usage: hack rm N"
+            fi
+            ;;
+        *)
+            echo "[?] Usage: hack [dir|cd|list|rm] [options]"
+            ;;
+    esac
+}
+### HACKING STOP
+
+cdback(){
+    # Change back to the previous directory that you accidentally cd into
+}
+
+mvundo(){
+    # Undo the mv you just did
 }
 
 refresh_ip(){
