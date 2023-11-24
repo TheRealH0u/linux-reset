@@ -345,7 +345,7 @@ clean_hacking_dirs() {
     done
 
     setopt nullglob
-    for dir_path in ~/.hacking/hacking_*/;
+    for dir_path in /home/kali/.hacking/hacking_*/;
     do
         if [[ ! "${valid_dirs[*]}" =~ "${dir_path}" ]]; then
             valid_dirs+=($dir_path)
@@ -388,7 +388,7 @@ dir_function() {
     fi
 
     # Create a directory in /tmp by prepending "hacking_" to the name
-    local hacking_dir=~/.hacking/hacking_$_hacking_dir_name
+    local hacking_dir=/home/kali/.hacking/hacking_$_hacking_dir_name
 
     # Check if the folder in /tmp already exists
     if [[ -e $hacking_dir ]]; then
