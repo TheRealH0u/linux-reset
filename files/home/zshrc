@@ -124,10 +124,10 @@ get_ips() {
         if [[ "$key" = "global" ]]; 
         then
             value="${addresses[$key]}"
-            global_ip=$'%b%F{%(#.red.green)}[%B%F{reset}'"global $value"$'%b%F{%(#.red.green)}]%B%F{reset}'
+            global_ip=$'%b%F{%(#.red.blue)}[%B%F{reset}'"global $value"$'%b%F{%(#.red.blue)}]%B%F{reset}'
         else
             value="${addresses[$key]}"
-            ips="$ips"$'%b%F{%(#.red.green)}[%B%F{reset}'"$key $value"$'%b%F{%(#.red.green)}]%B%F{reset}'
+            ips="$ips"$'%b%F{%(#.red.blue)}[%B%F{reset}'"$key $value"$'%b%F{%(#.red.blue)}]%B%F{reset}'
         fi
     done
     echo "addresses: $global_ip$ips"
@@ -139,7 +139,7 @@ configure_prompt() {
     local ips=$(get_ips)
     local prompt_ips="${ips}"
 
-    local fadebar=${1:-'green'}
+    local fadebar=${1:-'blue'}
     [ "$EUID" -eq 0 ] && local fadebar=${1:-'red'}
     local userhost=${2:-'white'}
     local date=${3:-'white'}
@@ -152,14 +152,14 @@ configure_prompt() {
     [ "$EUID" -eq 0 ] && prompt_symbol=💀
     case "$PROMPT_ALTERNATIVE" in
         twoline)
-            #PROMPT=$'%F{%(#.blue.green)}┌──${debian_chroot:+($debian_chroot)─}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))─}(%B%F{}%n'$prompt_symbol$'%m%b%F{%(#.blue.green)})-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.green)}]\n└─%B%(#.%F{red}#.%F{blue}$)%b%F{reset} '
+            #PROMPT=$'%F{%(#.blue.blue)}┌──${debian_chroot:+($debian_chroot)─}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))─}(%B%F{}%n'$prompt_symbol$'%m%b%F{%(#.blue.blue)})-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.blue)}]\n└─%B%(#.%F{red}#.%F{blue}$)%b%F{reset} '
             PROMPT=$'%B%F{'$fadebar'}'$schars[333]$schars[262]$schars[261]$schars[260]$'%B%F{'$userhost$'}%K{'$fadebar$'}%n'$prompt_symbol$'%m%b%k%f%F{'$fadebar$'}%K{black}'$schars[260]$schars[261]$schars[262]$schars[333]$'%b%f%k%F{'$fadebar$'}%K{black}'$schars[333]$schars[262]$schars[261]$schars[260]$'%B%F{'$date$'}%K{black} %D{%a %b %d} %D{%I:%M:%S%P}'$prompt_newline$'\n%B%F{'$cwd$'}%K{black}%d>%b%f%k '
             # Right-side prompt with exit codes and background processes
             RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.) '"%B%F{$fadebar}$schars[333]$schars[262]$schars[261]$schars[260]%b%F{$fadebar}%K{black} $prompt_ips $schars[260]$schars[261]$schars[262]$schars[333]%F{$fadebar}%K{black}$schars[333]$schars[262]$schars[261]$schars[260]%B%F{$fadebar}>%b%f%k "
             #RPROMPT=$prompt_ips$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
             ;;
         oneline)
-            PROMPT=$'${debian_chroot:+($debian_chroot)}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%B%F{%(#)}%n@%m%b%F{reset}:%B%F{%(#.blue.green)}%~%b%F{reset}%(#.#.$) '
+            PROMPT=$'${debian_chroot:+($debian_chroot)}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%B%F{%(#)}%n@%m%b%F{reset}:%B%F{%(#.blue.blue)}%~%b%F{reset}%(#.#.$) '
             RPROMPT=
             ;;
         backtrack)
@@ -345,7 +345,7 @@ clean_hacking_dirs() {
     done
 
     setopt nullglob
-    for dir_path in /home/kali/.hacking/hacking_*/;
+    for dir_path in ~/.hacking/hacking_*/;
     do
         if [[ ! "${valid_dirs[*]}" =~ "${dir_path}" ]]; then
             valid_dirs+=($dir_path)
@@ -388,7 +388,7 @@ dir_function() {
     fi
 
     # Create a directory in /tmp by prepending "hacking_" to the name
-    local hacking_dir=/home/kali/.hacking/hacking_$_hacking_dir_name
+    local hacking_dir=~/.hacking/hacking_$_hacking_dir_name
 
     # Check if the folder in /tmp already exists
     if [[ -e $hacking_dir ]]; then
