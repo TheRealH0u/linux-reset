@@ -107,7 +107,7 @@ fill_addresses(){
 
     local interface=""
     local ips=""
-    for interface in $(ip -o -4 addr show | awk '/(eth|wlan)[0-9]+/ {print $2}' | cut -d':' -f1); do
+    for interface in $(ip -o -4 addr show | awk '/(eth|wlan|tun)[0-9]+/ {print $2}' | cut -d':' -f1); do
         local ipo=""
         ipo=$(ip -o -4 addr show "$interface" 2>/dev/null | awk '{print $4}' | cut -d'/' -f1)
         #echo "$ipo"
@@ -331,13 +331,13 @@ else
 fi
 # Function to validate and clean up the HACKING_DIRS array
 clean_hacking_dirs() {
-    local tmp_dir=()
+    local hacking_dir=()
     while IFS= read -r line; do
-        tmp_dir+=("$line")
+        hacking_dir+=("$line")
     done < "$HACKING_DIRS_FILE"
 
     local valid_dirs=()
-    for dir_path in "${tmp_dir[@]}"
+    for dir_path in "${hacking_dir[@]}"
     do
         if [ -d "$dir_path" ] || [ -f "$dir_path" ]; then
             valid_dirs+=($dir_path)
@@ -345,7 +345,7 @@ clean_hacking_dirs() {
     done
 
     setopt nullglob
-    for dir_path in /tmp/hacking_*/;
+    for dir_path in ~/.hacking/hacking_*/;
     do
         if [[ ! "${valid_dirs[*]}" =~ "${dir_path}" ]]; then
             valid_dirs+=($dir_path)
@@ -388,26 +388,26 @@ dir_function() {
     fi
 
     # Create a directory in /tmp by prepending "hacking_" to the name
-    local tmp_dir="/tmp/hacking_$_hacking_dir_name"
+    local hacking_dir=~/.hacking/hacking_$_hacking_dir_name
 
     # Check if the folder in /tmp already exists
-    if [[ -e $tmp_dir ]]; then
-        echo "[!] $tmp_dir exists. Use another name."
+    if [[ -e $hacking_dir ]]; then
+        echo "[!] $hacking_dir exists. Use another name."
         return
     fi
 
     # Create the directory
-    mkdir -p "$tmp_dir"
+    mkdir -p "$hacking_dir"
 
     # Copy all folders/files into the tmp directory created
     for dir_path in "$@"; do
         if [[ -e $dir_path ]]; then
             if [[ -d $dir_path ]]; then
-                cp -r "$dir_path" "$tmp_dir"
-                #echo "COPY FOLDER $dir_path to $tmp_dir"
+                cp -r "$dir_path" "$hacking_dir"
+                #echo "COPY FOLDER $dir_path to $hacking_dir"
             else
-                cp "$dir_path" "$tmp_dir"
-                #echo "COPY FILE $dir_path to $tmp_dir"
+                cp "$dir_path" "$hacking_dir"
+                #echo "COPY FILE $dir_path to $hacking_dir"
             fi
         else
             echo "[?] Warning: '$dir_path' does not exist and will not be copied."
@@ -416,12 +416,12 @@ dir_function() {
 
     # Update the HACKING_DIRS array and file
     clean_hacking_dirs
-    echo "[*] Hacking in $tmp_dir"
-    cd "$tmp_dir"
+    echo "[*] Hacking in $hacking_dir"
+    cd "$hacking_dir"
     
     # Make script folder and start script
-    mkdir "$tmp_dir/.script_log"
-    script --timing="$tmp_dir/.script_log/timming_log" "$tmp_dir/.script_log/script"
+    mkdir "$hacking_dir/.script_log"
+    script --timing="$hacking_dir/.script_log/timming_log" "$hacking_dir/.script_log/script"
 }
 change_function() {
     #clean_hacking_dirs
@@ -482,7 +482,7 @@ hack() {
                 echo "[?] Usage: hack cd N"
             fi
             ;;
-        "list")
+        "ls")
             list_function
             ;;
         "rm")
