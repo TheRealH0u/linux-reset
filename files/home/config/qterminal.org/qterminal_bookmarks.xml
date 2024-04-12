@@ -1,0 +1,23 @@
+<qterminal>
+  <group name="Dirs">
+    <command name="Git" value="cd $HOME/Documents/git"/>
+    <command name="Ethical Hacking" value="cd $HOME/Documents/git/ethical_hacking"/>
+    <command name="myCTFs" value="cd $HOME/Documents/git/myCTFs"/>
+    <command name="Wordlists" value="cd $HOME/Documents/git/wordlists"/>
+    <command name="HTML" value="cd /var/www/html"/>
+  </group>
+  <group name="hacking">
+    <command name=".Hacking" value="cd $HOME/.hacking"/>
+  </group>
+  <group name="Docker compose">
+    <command name="Build" value="sudo docker-compose up --build"/>
+    <command name="Build Background" value="sudo docker-compose up --build -d"/>
+    <command name="Check logs" value="sudo docker-compose logs -t -f"/>
+  </group>
+  <group name="Docker">
+    <command name="Watch PS" value="sudo watch 'sudo docker ps'"/>
+    <group name="Exec">
+      <command name="SH" value='echo -n "Docker ID: "; read container_id &amp;&amp; sudo docker exec -it "$container_id" sh'/>
+    </group>
+  </group>
+</qterminal>

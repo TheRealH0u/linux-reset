@@ -3,7 +3,7 @@
 <channel name="xfwm4" version="1.0">
   <property name="general" type="empty">
     <property name="button_layout" type="string" value="O|HMC"/>
-    <property name="theme" type="string" value="Mantis Night"/>
+    <property name="theme" type="string" value="Mantis Dusk"/>
     <property name="title_font" type="string" value="Fira Code Medium 10"/>
     <property name="easy_click" type="empty"/>
     <property name="workspace_count" type="empty"/>

@@ -9,5 +9,6 @@
     <property name="inactivity-on-ac" type="uint" value="14"/>
     <property name="dpms-enabled" type="bool" value="false"/>
     <property name="blank-on-ac" type="int" value="0"/>
+    <property name="lock-screen-suspend-hibernate" type="bool" value="true"/>
   </property>
 </channel>

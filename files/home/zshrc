@@ -91,6 +91,35 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+# COLORS AND SYMBOLS/EMOJIS
+local prompt_symbol=💻
+local fadebar=${1:-'white'}
+local userhost=${2:-'white'}
+local userhost_bg=${3:-''}
+local date=${4:-'white'}
+local cwd=${5:-'yellow'}
+local prompt_ips_color=${6:-'cyan'}
+local address_color=${7:-'red'}
+
+# Skull emoji for root terminal
+if [ "$EUID" -eq 0 ]; then
+    prompt_symbol=💀
+    fadebar=${1:-'red'}
+    userhost=${2:-'red'}
+    userhost_bg=${3:-''}
+    date=${4:-'white'}
+    cwd=${5:-'yellow'}
+    prompt_ips_color=${6:-'cyan'}
+    address_color=${7:-'white'}
+fi
+
+# The following block is surrounded by two delimiters.
+# These delimiters must not be modified. Thanks.
+# START KALI CONFIG VARIABLES
+PROMPT_ALTERNATIVE=oneline
+NEWLINE_BEFORE_PROMPT=no
+# STOP KALI CONFIG VARIABLES
+
 ## My functions to get IPs
 # Function to get the IP address of an interface
 # Function to get the IP addresses of all ethX and wlanX interfaces
@@ -121,45 +150,41 @@ get_ips() {
 
     # Iterate through the keys and values
     for key in "${keys[@]}"; do
-        if [[ "$key" = "global" ]]; 
+        if [[ "$key" = "global" ]];
         then
             value="${addresses[$key]}"
-            global_ip=$'%b%F{%(#.red.blue)}[%B%F{reset}'"global $value"$'%b%F{%(#.red.blue)}]%B%F{reset}'
+            global_ip=$'%B%F{'$fadebar$'}[%B%F{'$prompt_ips_color$'}'"global $value"$'%B%F{'$fadebar$'}]%k'
         else
             value="${addresses[$key]}"
-            ips="$ips"$'%b%F{%(#.red.blue)}[%B%F{reset}'"$key $value"$'%b%F{%(#.red.blue)}]%B%F{reset}'
+            ips="$ips"$'%B%F{'$fadebar$'}[%B%F{'$prompt_ips_color$'}'"$key $value"$'%B%F{'$fadebar$'}]%k'
         fi
     done
-    echo "addresses: $global_ip$ips"
+    echo $'%k%B%F{'$address_color$'}'addresses: $global_ip$ips $'%k'
 }
 
 configure_prompt() {
-    prompt_symbol=💻
     fill_addresses
     local ips=$(get_ips)
     local prompt_ips="${ips}"
 
-    local fadebar=${1:-'blue'}
     [ "$EUID" -eq 0 ] && local fadebar=${1:-'red'}
-    local userhost=${2:-'white'}
-    local date=${3:-'white'}
-    local cwd=${4:-'yellow'}
+    local prompt_newline="
+"
     local -A schars
     autoload -Uz prompt_special_chars
     prompt_special_chars
 
-    # Skull emoji for root terminal
-    [ "$EUID" -eq 0 ] && prompt_symbol=💀
     case "$PROMPT_ALTERNATIVE" in
         twoline)
             #PROMPT=$'%F{%(#.blue.blue)}┌──${debian_chroot:+($debian_chroot)─}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))─}(%B%F{}%n'$prompt_symbol$'%m%b%F{%(#.blue.blue)})-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.blue)}]\n└─%B%(#.%F{red}#.%F{blue}$)%b%F{reset} '
-            PROMPT=$'%B%F{'$fadebar'}'$schars[333]$schars[262]$schars[261]$schars[260]$'%B%F{'$userhost$'}%K{'$fadebar$'}%n'$prompt_symbol$'%m%b%k%f%F{'$fadebar$'}%K{black}'$schars[260]$schars[261]$schars[262]$schars[333]$'%b%f%k%F{'$fadebar$'}%K{black}'$schars[333]$schars[262]$schars[261]$schars[260]$'%B%F{'$date$'}%K{black} %D{%a %b %d} %D{%I:%M:%S%P}'$prompt_newline$'\n%B%F{'$cwd$'}%K{black}%d>%b%f%k '
+            PROMPT=$'%B%F{'$fadebar'}'$schars[333]$schars[262]$schars[261]$schars[260]$'%B%F{'$userhost$'}%K{'$userhost_bg$'}%n'$prompt_symbol$'%m%b%k%f%F{'$fadebar$'}%k'$schars[260]$schars[261]$schars[262]$schars[333]$'%b%f%k%F{'$fadebar$'}%k'$schars[333]$schars[262]$schars[261]$schars[260]$'%B%F{'$date$'}%k %D{%a %b %d} %D{%I:%M:%S%P}'$prompt_newline$'%B%F{'$cwd$'}%k%d>%b%f%k '
             # Right-side prompt with exit codes and background processes
-            RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.) '"%B%F{$fadebar}$schars[333]$schars[262]$schars[261]$schars[260]%b%F{$fadebar}%K{black} $prompt_ips $schars[260]$schars[261]$schars[262]$schars[333]%F{$fadebar}%K{black}$schars[333]$schars[262]$schars[261]$schars[260]%B%F{$fadebar}>%b%f%k "
+            RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.) '"%B%F{$fadebar}$schars[333]$schars[262]$schars[261]$schars[260]%b%F{$fadebar}%k $prompt_ips $schars[260]$schars[261]$schars[262]$schars[333]%F{$fadebar}%k$schars[333]$schars[262]$schars[261]$schars[260]%B%F{$fadebar}>%b%f%k "
             #RPROMPT=$prompt_ips$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
             ;;
         oneline)
-            PROMPT=$'${debian_chroot:+($debian_chroot)}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%B%F{%(#)}%n@%m%b%F{reset}:%B%F{%(#.blue.blue)}%~%b%F{reset}%(#.#.$) '
+            #PROMPT=$'${debian_chroot:+($debian_chroot)}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%B%F{%(#)}%n@%m%b%F{reset}:%B%F{%(#.blue.blue)}%~%b%F{reset}%(#.#.$) '
+            PROMPT=$'%B%F{'$fadebar'}'$schars[333]$schars[262]$schars[261]$schars[260]$'%B%F{'$userhost$'}%K{'$userhost_bg$'}%n'$prompt_symbol$'%m%B%k%f%F{'$fadebar$'}%k'$schars[260]$schars[261]$schars[262]$schars[333]$'%B%f%k%F{'$fadebar$'}%k'$schars[333]$schars[262]$schars[261]$schars[260]$'%B%F{'$date$'}%k %D{%a %b %d} %D{%I:%M:%S%P}'$prompt_newline$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'$'%b%f%k%F{'$fadebar$'}%k'$prompt_ips''$prompt_newline$'%B%F{'$cwd$'}%k%d>%b%f%k '
             RPROMPT=
             ;;
         backtrack)
@@ -170,12 +195,16 @@ configure_prompt() {
     unset prompt_symbol
 }
 
-# The following block is surrounded by two delimiters.
-# These delimiters must not be modified. Thanks.
-# START KALI CONFIG VARIABLES
-PROMPT_ALTERNATIVE=twoline
-NEWLINE_BEFORE_PROMPT=no
-# STOP KALI CONFIG VARIABLES
+# !DEPRECATED FUNCTION STALLS MY TERMINAL
+# choose_prompt_layout(){
+#     local width=$(tput cols)
+#     if [[ $width -lt 160 ]]; then
+#         PROMPT_ALTERNATIVE=oneline
+#     else
+#         PROMPT_ALTERNATIVE=twoline
+#     fi
+#     configure_prompt
+# }
 
 if [ "$color_prompt" = yes ]; then
     # override default virtualenv indicator in prompt
@@ -267,6 +296,8 @@ precmd() {
             print ""
         fi
     fi
+
+    # !choose_prompt_layout
 }
 
 # enable color support of ls, less and man, and also add handy aliases
@@ -345,7 +376,7 @@ clean_hacking_dirs() {
     done
 
     setopt nullglob
-    for dir_path in ~/.hacking/hacking_*/;
+    for dir_path in ~/.hacking/*/;
     do
         if [[ ! "${valid_dirs[*]}" =~ "${dir_path}" ]]; then
             valid_dirs+=($dir_path)
@@ -388,7 +419,7 @@ dir_function() {
     fi
 
     # Create a directory in /tmp by prepending "hacking_" to the name
-    local hacking_dir=~/.hacking/hacking_$_hacking_dir_name
+    local hacking_dir=~/.hacking/$_hacking_dir_name
 
     # Check if the folder in /tmp already exists
     if [[ -e $hacking_dir ]]; then
@@ -494,15 +525,33 @@ hack() {
             fi
             ;;
         *)
-            echo "[?] Usage: hack [dir|cd|list|rm] [options]"
+            echo "[?] Usage: hack [dir|cd|ls|rm] [options]"
             ;;
     esac
 }
 ### HACKING STOP
 
-cdback(){
-    # Change back to the previous directory that you accidentally cd into
-}
+## MY ALIASES AND FUNCTIONS
+
+# cdh() {
+#     local history
+#     history=$(dirs -l -p | awk '!seen[$0]++' | tac)
+#     if [ -z "$history" ]; then
+#         echo "Directory history is empty."
+#     else
+#         echo "Directory history:"
+#         echo "$history" | nl -v 0
+#         if [ -n "$1" ]; then
+#             local index
+#             index=$(( $1 + 1 )) # Adjust index to account for nl numbering
+#             if [ $index -lt 0 ] || [ $index -ge $(echo "$history" | wc -l) ]; then
+#                 echo "Invalid index."
+#             else
+#                 cd "$(echo "$history" | sed -n "${index}p")"
+#             fi
+#         fi
+#     fi
+# }
 
 mvundo(){
     # Undo the mv you just did
@@ -514,7 +563,7 @@ refresh_ip(){
         unset "addresses[$key]"
     done
 
-    configure_prompt
+    # configure_prompt
 }
 
 alert() {          
@@ -522,7 +571,9 @@ alert() {
 }
 alias beep="paplay /usr/share/sounds/freedesktop/stereo/complete.oga"
 alias tools="cd $HOME/Tools"
+alias clip="xclip -selection clipboard -rmlastnl"
 
 # Added custom paths of binaries
 GOPATH=$HOME/.go
-PATH=$PATH:~/.local/bin:$GOPATH/bin
+YARNPATH=$HOME/.yarn
+PATH=$PATH:~/.local/bin:$GOPATH/bin:$YARNPATH/bin

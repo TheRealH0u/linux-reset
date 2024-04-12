@@ -1,0 +1,22 @@
+{
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    "workbench.colorTheme": "Default High Contrast",
+    "git.openRepositoryInParentFolders": "never",
+    "clangd.path": "/home/kali/.config/Code - OSS/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/17.0.3/clangd_17.0.3/bin/clangd",
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[c]": {
+        "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+    },
+    "[php]": {
+        "editor.defaultFormatter": "StoilDobreff.php-resolver"
+    },
+    "cSpell.userWords": [
+        "padit",
+        "recvline",
+        "sendline"
+    ],
+    "security.workspace.trust.untrustedFiles": "open"
+}

@@ -44,44 +44,66 @@
         <property name="workspace0" type="empty">
           <property name="color-style" type="int" value="1"/>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/backgrounds/kali-16x9/kali-red-sticker.jpg"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/kali-16x9/katana.png"/>
         </property>
         <property name="workspace1" type="empty">
           <property name="color-style" type="int" value="1"/>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/backgrounds/kali-16x9/kali-red-sticker.jpg"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/kali-16x9/katana.png"/>
         </property>
         <property name="workspace2" type="empty">
           <property name="color-style" type="int" value="1"/>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/backgrounds/kali-16x9/kali-red-sticker.jpg"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/kali-16x9/katana.png"/>
         </property>
         <property name="workspace3" type="empty">
           <property name="color-style" type="int" value="1"/>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/backgrounds/kali-16x9/kali-red-sticker.jpg"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/kali-16x9/katana.png"/>
         </property>
       </property>
       <property name="monitorVirtual2" type="empty">
         <property name="workspace0" type="empty">
           <property name="color-style" type="int" value="1"/>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/backgrounds/kali-16x9/kali-red-sticker.jpg"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/kali-16x9/katana.png"/>
         </property>
         <property name="workspace1" type="empty">
           <property name="color-style" type="int" value="1"/>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/backgrounds/kali-16x9/kali-red-sticker.jpg"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/kali-16x9/default"/>
         </property>
         <property name="workspace2" type="empty">
           <property name="color-style" type="int" value="1"/>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/backgrounds/kali-16x9/kali-red-sticker.jpg"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/kali-16x9/default"/>
         </property>
         <property name="workspace3" type="empty">
           <property name="color-style" type="int" value="1"/>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/backgrounds/kali-16x9/kali-red-sticker.jpg"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/kali-16x9/default"/>
+        </property>
+      </property>
+      <property name="monitorVirtual3" type="empty">
+        <property name="workspace0" type="empty">
+          <property name="color-style" type="int" value="0"/>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/kali-16x9/default"/>
+        </property>
+        <property name="workspace1" type="empty">
+          <property name="color-style" type="int" value="0"/>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/kali-16x9/default"/>
+        </property>
+        <property name="workspace2" type="empty">
+          <property name="color-style" type="int" value="0"/>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/kali-16x9/default"/>
+        </property>
+        <property name="workspace3" type="empty">
+          <property name="color-style" type="int" value="0"/>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/kali-16x9/default"/>
         </property>
       </property>
     </property>
