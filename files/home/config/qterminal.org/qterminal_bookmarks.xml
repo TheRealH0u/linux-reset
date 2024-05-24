@@ -1,13 +1,11 @@
 <qterminal>
   <group name="Dirs">
+    <command name="Hacking" value="cd $HOME/.hacking"/>
     <command name="Git" value="cd $HOME/Documents/git"/>
     <command name="Ethical Hacking" value="cd $HOME/Documents/git/ethical_hacking"/>
     <command name="myCTFs" value="cd $HOME/Documents/git/myCTFs"/>
     <command name="Wordlists" value="cd $HOME/Documents/git/wordlists"/>
     <command name="HTML" value="cd /var/www/html"/>
-  </group>
-  <group name="hacking">
-    <command name=".Hacking" value="cd $HOME/.hacking"/>
   </group>
   <group name="Docker compose">
     <command name="Build" value="sudo docker-compose up --build"/>
@@ -16,8 +14,28 @@
   </group>
   <group name="Docker">
     <command name="Watch PS" value="sudo watch 'sudo docker ps'"/>
+    <command name="Remove all dockers" value='sudo docker rm --force $(sudo docker ps -a -q)'/>
+    <command name="Kill all dockers" value='sudo docker kill $(sudo docker ps -q)'/>
+    <command name="!!!Prune!!!" value="sudo docker system prune -a --volumes" />
     <group name="Exec">
-      <command name="SH" value='echo -n "Docker ID: "; read container_id &amp;&amp; sudo docker exec -it "$container_id" sh'/>
+      <command name="SH" value='echo -n "Docker ID: "; read container_id &amp;&amp; sudo docker exec -it "$container_id" sh; unset container_id'/>
     </group>
+  </group>
+  <group name="TTY">
+    <command name="python pty sh" value="python -c 'import pty; pty.spawn(&quot;/bin/sh&quot;)'" />
+    <command name="python pty bash" value="python -c 'import pty; pty.spawn(&quot;/bin/bash&quot;)'" />
+    <command name="python pty zsh" value="python -c 'import pty; pty.spawn(&quot;/bin/zsh&quot;)'" />
+    <command name="xterm" value="export TERM=xterm" />
+    <command name="stty raw" value="stty raw -echo; fg" />
+    <command name="stty sane" value="stty sane" />
+  </group>
+  <group name="VMware">
+    <command name="Copy Paste no work" value='sudo apt-get autoremove open-vm-tools -y &amp;&amp; sudo apt-get install open-vm-tools-desktop -y'/>
+  </group>
+  <group name="Processes">
+    <command name="ProcPort" value='echo -n "PORT: "; read PORT &amp;&amp; sudo lsof -i ":$PORT"; unset PORT'/>
+    <command name="ESTABLISHED and LISTEN" value="sudo netstat -anp | grep -P '\b(ESTABLISHED|LISTEN)\b'"/>
+    <command name="PID more info" value='echo -n "PID: "; read PID &amp;&amp; sudo ps -f -p "$PID"; unset PID'/>
+    <command name="PID cwd" value='echo -n "PID: "; read PID &amp;&amp; sudo ls -l "/proc/$PID/cwd"; unset PID'/>
   </group>
 </qterminal>
