@@ -184,7 +184,7 @@ configure_prompt() {
             ;;
         oneline)
             #PROMPT=$'${debian_chroot:+($debian_chroot)}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%B%F{%(#)}%n@%m%b%F{reset}:%B%F{%(#.blue.blue)}%~%b%F{reset}%(#.#.$) '
-            PROMPT=$'%B%F{'$fadebar'}'$schars[333]$schars[262]$schars[261]$schars[260]$'%B%F{'$userhost$'}%K{'$userhost_bg$'}%n'$prompt_symbol$'%m%B%k%f%F{'$fadebar$'}%k'$schars[260]$schars[261]$schars[262]$schars[333]$'%B%f%k%F{'$fadebar$'}%k'$schars[333]$schars[262]$schars[261]$schars[260]$'%B%F{'$date$'}%k %D{%a %b %d} %D{%I:%M:%S%P}'$prompt_newline$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'$'%b%f%k%F{'$fadebar$'}%k'$prompt_ips''$prompt_newline$'%B%F{'$cwd$'}%k%d>%b%f%k '
+            PROMPT=$'%B%F{'$fadebar'}'$schars[333]$schars[262]$schars[261]$schars[260]$'%B%F{'$userhost$'}%K{'$userhost_bg$'}%n'$prompt_symbol$'%m%B%k%f%F{'$fadebar$'}%k'$schars[260]$schars[261]$schars[262]$schars[333]$'%B%f%k%F{'$fadebar$'}%k'$schars[333]$schars[262]$schars[261]$schars[260]$'%B%F{'$date$'}%k %D{%a %b %d} %D{%I:%M:%S%P}'$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'$prompt_newline$'%b%f%k%F{'$fadebar$'}%k'$prompt_ips''$prompt_newline$'%B%F{'$cwd$'}%k%d>%b%f%k '
             RPROMPT=
             ;;
         backtrack)

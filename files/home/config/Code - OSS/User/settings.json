@@ -18,5 +18,10 @@
         "recvline",
         "sendline"
     ],
-    "security.workspace.trust.untrustedFiles": "open"
+    "security.workspace.trust.untrustedFiles": "open",
+    "sync.gist": "82c709ffbda35ccf5b6d7e9a1276d324",
+    "sync.forceUpload": false,
+    "[cpp]": {
+        "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+    }
 }

@@ -1,4 +1,7 @@
 <qterminal>
+<group name="Web Servers">
+<command name="Python3" value="python3 -m http.server 4242"/>
+</group>
   <group name="Dirs">
     <command name="Hacking" value="cd $HOME/.hacking"/>
     <command name="Git" value="cd $HOME/Documents/git"/>
@@ -22,9 +25,9 @@
     </group>
   </group>
   <group name="TTY">
-    <command name="python pty sh" value="python -c 'import pty; pty.spawn(&quot;/bin/sh&quot;)'" />
-    <command name="python pty bash" value="python -c 'import pty; pty.spawn(&quot;/bin/bash&quot;)'" />
-    <command name="python pty zsh" value="python -c 'import pty; pty.spawn(&quot;/bin/zsh&quot;)'" />
+    <command name="python3 pty sh" value="python3 -c 'import pty; pty.spawn(&quot;/bin/sh&quot;)'" />
+    <command name="python3 pty bash" value="python3 -c 'import pty; pty.spawn(&quot;/bin/bash&quot;)'" />
+    <command name="python3 pty zsh" value="python3 -c 'import pty; pty.spawn(&quot;/bin/zsh&quot;)'" />
     <command name="xterm" value="export TERM=xterm" />
     <command name="stty raw" value="stty raw -echo; fg" />
     <command name="stty sane" value="stty sane" />
