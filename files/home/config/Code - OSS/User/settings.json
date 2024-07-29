@@ -23,5 +23,6 @@
     "sync.forceUpload": false,
     "[cpp]": {
         "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
-    }
+    },
+    "window.zoomLevel": 1
 }

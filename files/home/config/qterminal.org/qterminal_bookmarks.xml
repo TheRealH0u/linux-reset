@@ -16,6 +16,7 @@
     <command name="Check logs" value="sudo docker-compose logs -t -f"/>
   </group>
   <group name="Docker">
+    <command name="Get IP" value='echo -n "Docker id: "; read dID &amp;&amp; sudo docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" $dID' />
     <command name="Watch PS" value="sudo watch 'sudo docker ps'"/>
     <command name="Remove all dockers" value='sudo docker rm --force $(sudo docker ps -a -q)'/>
     <command name="Kill all dockers" value='sudo docker kill $(sudo docker ps -q)'/>
