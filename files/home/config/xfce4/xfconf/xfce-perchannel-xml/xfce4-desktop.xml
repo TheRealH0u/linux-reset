@@ -13,6 +13,26 @@
         <property name="last-image" type="empty"/>
         <property name="last-single-image" type="empty"/>
         <property name="image-style" type="empty"/>
+        <property name="workspace0" type="empty">
+          <property name="color-style" type="int" value="1"/>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/home/kali/Pictures/wallhaven-ympgp7.png"/>
+        </property>
+        <property name="workspace1" type="empty">
+          <property name="color-style" type="int" value="1"/>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/home/kali/Pictures/wallhaven-ympgp7.png"/>
+        </property>
+        <property name="workspace2" type="empty">
+          <property name="color-style" type="int" value="1"/>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/home/kali/Pictures/wallhaven-ympgp7.png"/>
+        </property>
+        <property name="workspace3" type="empty">
+          <property name="color-style" type="int" value="1"/>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/home/kali/Pictures/wallhaven-ympgp7.png"/>
+        </property>
       </property>
       <property name="monitor1" type="empty">
         <property name="brightness" type="empty"/>

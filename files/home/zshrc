@@ -127,6 +127,7 @@ declare -A addresses
 
 fill_addresses(){
     local ipc
+    # TODO: Add if timeouted then say THAT IT WAS FUCKING TIMEOUTED YOU FUCKING IDIOT
     ipc=$(curl -s -m 2 ifconfig.me)
     if [ -n "$ipc" ]; then
         addresses[global]=$ipc
@@ -563,7 +564,7 @@ refresh_ip(){
         unset "addresses[$key]"
     done
 
-    # configure_prompt
+    configure_prompt
 }
 
 alert() {          
