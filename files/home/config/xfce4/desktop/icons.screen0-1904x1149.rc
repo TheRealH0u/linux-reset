@@ -1,6 +1,14 @@
 [xfdesktop-version-4.10.3+-rcfile_format]
 4.10.3+=true
 
+[2016-09-07-11-07-12-00]
+row=4
+col=0
+
+[OnePlus]
+row=3
+col=0
+
 [Trash]
 row=0
 col=0

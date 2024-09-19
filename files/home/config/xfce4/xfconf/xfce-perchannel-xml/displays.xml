@@ -16,14 +16,14 @@
         <property name="Y" type="double" value="1"/>
       </property>
       <property name="Position" type="empty">
-        <property name="X" type="int" value="1080"/>
+        <property name="X" type="int" value="0"/>
         <property name="Y" type="int" value="0"/>
       </property>
     </property>
     <property name="Virtual2" type="string" value="Virtual2">
-      <property name="Active" type="bool" value="true"/>
+      <property name="Active" type="bool" value="false"/>
       <property name="EDID" type="string" value=""/>
-      <property name="Resolution" type="string" value="1080x1920"/>
+      <property name="Resolution" type="string" value="2560x1440"/>
       <property name="RefreshRate" type="double" value="60"/>
       <property name="Rotation" type="int" value="0"/>
       <property name="Reflection" type="string" value="0"/>
@@ -33,7 +33,7 @@
         <property name="Y" type="double" value="1"/>
       </property>
       <property name="Position" type="empty">
-        <property name="X" type="int" value="0"/>
+        <property name="X" type="int" value="2560"/>
         <property name="Y" type="int" value="0"/>
       </property>
     </property>
@@ -69,14 +69,14 @@
         <property name="Y" type="double" value="1"/>
       </property>
       <property name="Position" type="empty">
-        <property name="X" type="int" value="1080"/>
+        <property name="X" type="int" value="0"/>
         <property name="Y" type="int" value="0"/>
       </property>
     </property>
     <property name="Virtual2" type="string" value="Virtual2">
       <property name="Active" type="bool" value="true"/>
       <property name="EDID" type="string" value=""/>
-      <property name="Resolution" type="string" value="1080x1920"/>
+      <property name="Resolution" type="string" value="2560x1440"/>
       <property name="RefreshRate" type="double" value="60"/>
       <property name="Rotation" type="int" value="0"/>
       <property name="Reflection" type="string" value="0"/>
@@ -86,7 +86,7 @@
         <property name="Y" type="double" value="1"/>
       </property>
       <property name="Position" type="empty">
-        <property name="X" type="int" value="0"/>
+        <property name="X" type="int" value="2560"/>
         <property name="Y" type="int" value="0"/>
       </property>
     </property>
