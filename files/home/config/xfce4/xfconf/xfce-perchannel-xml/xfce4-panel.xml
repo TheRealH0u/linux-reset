@@ -62,6 +62,8 @@
         <value type="string" value="code-oss.desktop"/>
       </property>
       <property name="recent" type="array">
+        <value type="string" value="kali-burpsuite.desktop"/>
+        <value type="string" value="code-oss.desktop"/>
         <value type="string" value="qt5ct.desktop"/>
         <value type="string" value="kali-jadx-gui.desktop"/>
         <value type="string" value="org.wireshark.Wireshark.desktop"/>
@@ -70,8 +72,6 @@
         <value type="string" value="arandr.desktop"/>
         <value type="string" value="xfce4-color-settings.desktop"/>
         <value type="string" value="kali-atk6-thcping6.desktop"/>
-        <value type="string" value="xfce-display-settings.desktop"/>
-        <value type="string" value="xfce-wm-settings.desktop"/>
       </property>
     </property>
     <property name="plugin-2" type="string" value="separator"/>
