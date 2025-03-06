@@ -21,7 +21,7 @@
       </property>
     </property>
     <property name="Virtual2" type="string" value="Virtual2">
-      <property name="Active" type="bool" value="false"/>
+      <property name="Active" type="bool" value="true"/>
       <property name="EDID" type="string" value=""/>
       <property name="Resolution" type="string" value="2560x1440"/>
       <property name="RefreshRate" type="double" value="60"/>
@@ -40,7 +40,7 @@
     <property name="Virtual3" type="string" value="Virtual3">
       <property name="Active" type="bool" value="true"/>
       <property name="EDID" type="string" value=""/>
-      <property name="Resolution" type="string" value="2560x1440"/>
+      <property name="Resolution" type="string" value="1920x1080"/>
       <property name="RefreshRate" type="double" value="60"/>
       <property name="Rotation" type="int" value="0"/>
       <property name="Reflection" type="string" value="0"/>
@@ -50,7 +50,7 @@
         <property name="Y" type="double" value="1"/>
       </property>
       <property name="Position" type="empty">
-        <property name="X" type="int" value="3640"/>
+        <property name="X" type="int" value="3840"/>
         <property name="Y" type="int" value="0"/>
       </property>
     </property>
@@ -93,7 +93,7 @@
     <property name="Virtual3" type="string" value="Virtual3">
       <property name="Active" type="bool" value="true"/>
       <property name="EDID" type="string" value=""/>
-      <property name="Resolution" type="string" value="2560x1440"/>
+      <property name="Resolution" type="string" value="1920x1080"/>
       <property name="RefreshRate" type="double" value="60"/>
       <property name="Rotation" type="int" value="0"/>
       <property name="Reflection" type="string" value="0"/>
@@ -103,7 +103,7 @@
         <property name="Y" type="double" value="1"/>
       </property>
       <property name="Position" type="empty">
-        <property name="X" type="int" value="3640"/>
+        <property name="X" type="int" value="3840"/>
         <property name="Y" type="int" value="0"/>
       </property>
     </property>

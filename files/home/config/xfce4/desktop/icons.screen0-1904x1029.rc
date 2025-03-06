@@ -1,9 +1,21 @@
 [xfdesktop-version-4.10.3+-rcfile_format]
 4.10.3+=true
 
-[/home/kali/Desktop/hci_snoop_2024_09_11_08_28_15.cfa]
-row=5
+[/home/kali/Desktop/Razgrajaci]
+row=1
+col=2
+
+[/home/kali/Desktop/Fuzbal]
+row=4
 col=0
+
+[/home/kali/Desktop/madrid]
+row=3
+col=0
+
+[/home/kali/Desktop/Razgrajaci2.0]
+row=0
+col=4
 
 [Trash]
 row=0

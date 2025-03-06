@@ -24,5 +24,6 @@
     "[cpp]": {
         "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
     },
-    "redhat.telemetry.enabled": true
+    "redhat.telemetry.enabled": true,
+    "window.zoomLevel": -1
 }

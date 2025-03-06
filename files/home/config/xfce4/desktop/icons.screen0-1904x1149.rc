@@ -1,13 +1,21 @@
 [xfdesktop-version-4.10.3+-rcfile_format]
 4.10.3+=true
 
-[2016-09-07-11-07-12-00]
-row=4
-col=0
+[/home/kali/Desktop/Razgrajaci]
+row=0
+col=2
 
-[OnePlus]
+[/home/kali/Desktop/Fuzbal]
+row=1
+col=2
+
+[/home/kali/Desktop/madrid]
 row=3
 col=0
+
+[/home/kali/Desktop/Razgrajaci2.0]
+row=0
+col=4
 
 [Trash]
 row=0

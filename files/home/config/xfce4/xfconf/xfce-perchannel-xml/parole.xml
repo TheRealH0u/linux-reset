@@ -5,12 +5,12 @@
     <property name="font" type="string" value="Sans Bold 20"/>
   </property>
   <property name="folders" type="empty">
-    <property name="last-used-media" type="string" value="/tmp/test"/>
+    <property name="last-used-media" type="string" value="/usr/share/sounds/freedesktop/stereo"/>
   </property>
   <property name="window" type="empty">
     <property name="maximized" type="bool" value="true"/>
-    <property name="width" type="int" value="2554"/>
-    <property name="height" type="int" value="1412"/>
+    <property name="width" type="int" value="2348"/>
+    <property name="height" type="int" value="1231"/>
   </property>
   <property name="audio" type="empty">
     <property name="volume" type="int" value="100"/>

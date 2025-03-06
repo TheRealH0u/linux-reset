@@ -15,6 +15,7 @@
         <value type="int" value="3"/>
         <value type="int" value="4"/>
         <value type="int" value="5"/>
+        <value type="int" value="24"/>
         <value type="int" value="23"/>
         <value type="int" value="6"/>
         <value type="int" value="7"/>
@@ -51,6 +52,7 @@
         <value type="string" value="xfce4-terminal-emulator.desktop"/>
         <value type="string" value="root-terminal.desktop"/>
         <value type="string" value="xfce4-file-manager.desktop"/>
+        <value type="string" value="obsidian.desktop"/>
         <value type="string" value="xfce-text-editor.desktop"/>
         <value type="string" value="xfce4-web-browser.desktop"/>
         <value type="string" value="kali-www.desktop"/>
@@ -63,15 +65,15 @@
       </property>
       <property name="recent" type="array">
         <value type="string" value="kali-burpsuite.desktop"/>
+        <value type="string" value="kali-ghidra.desktop"/>
+        <value type="string" value="gparted.desktop"/>
+        <value type="string" value="kali-kismet.desktop"/>
+        <value type="string" value="obsidian.desktop"/>
         <value type="string" value="code-oss.desktop"/>
         <value type="string" value="qt5ct.desktop"/>
         <value type="string" value="kali-jadx-gui.desktop"/>
         <value type="string" value="org.wireshark.Wireshark.desktop"/>
         <value type="string" value="blueman-adapters.desktop"/>
-        <value type="string" value="nm-connection-editor.desktop"/>
-        <value type="string" value="arandr.desktop"/>
-        <value type="string" value="xfce4-color-settings.desktop"/>
-        <value type="string" value="kali-atk6-thcping6.desktop"/>
       </property>
     </property>
     <property name="plugin-2" type="string" value="separator"/>
@@ -257,6 +259,11 @@
       </property>
       <property name="settings" type="empty">
         <property name="show-qr-code" type="bool" value="false"/>
+      </property>
+    </property>
+    <property name="plugin-24" type="string" value="launcher">
+      <property name="items" type="array">
+        <value type="string" value="17313166481.desktop"/>
       </property>
     </property>
   </property>

@@ -1,6 +1,18 @@
 [xfdesktop-version-4.10.3+-rcfile_format]
 4.10.3+=true
 
+[/home/kali/Desktop/21]
+row=0
+col=4
+
+[/home/kali/Desktop/Razgrajaci]
+row=1
+col=2
+
+[/home/kali/Desktop/Code24]
+row=4
+col=0
+
 [Trash]
 row=0
 col=0

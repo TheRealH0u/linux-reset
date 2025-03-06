@@ -1,6 +1,14 @@
 [xfdesktop-version-4.10.3+-rcfile_format]
 4.10.3+=true
 
+[/home/kali/Desktop/sidebars]
+row=1
+col=5
+
+[/home/kali/Desktop/Code24]
+row=4
+col=0
+
 [Trash]
 row=0
 col=0
