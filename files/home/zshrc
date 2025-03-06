@@ -92,26 +92,28 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 # COLORS AND SYMBOLS/EMOJIS
-local prompt_symbol=💻
-local fadebar=${1:-'white'}
-local userhost=${2:-'white'}
-local userhost_bg=${3:-''}
-local date=${4:-'white'}
-local cwd=${5:-'yellow'}
-local prompt_ips_color=${6:-'cyan'}
-local address_color=${7:-'red'}
-
-# Skull emoji for root terminal
-if [ "$EUID" -eq 0 ]; then
-    prompt_symbol=💀
-    fadebar=${1:-'red'}
-    userhost=${2:-'red'}
+load_colors(){
+    prompt_symbol="💻"
+    fadebar=${1:-'white'}
+    userhost=${2:-'white'}
     userhost_bg=${3:-''}
     date=${4:-'white'}
     cwd=${5:-'yellow'}
     prompt_ips_color=${6:-'cyan'}
-    address_color=${7:-'white'}
-fi
+    address_color=${7:-'red'}
+
+    # Skull emoji for root terminal
+    if [ "$EUID" -eq 0 ]; then
+        prompt_symbol="💀"
+        fadebar=${1:-'red'}
+        userhost=${2:-'red'}
+        userhost_bg=${3:-''}
+        date=${4:-'white'}
+        cwd=${5:-'yellow'}
+        prompt_ips_color=${6:-'cyan'}
+        address_color=${7:-'white'}
+    fi
+}
 
 # The following block is surrounded by two delimiters.
 # These delimiters must not be modified. Thanks.
@@ -127,7 +129,18 @@ declare -A addresses
 
 fill_addresses(){
     local ipc
-    ipc=$(curl -s -m 2 ifconfig.me)
+
+    echo "Do you want to get your global IP? (y/N): " 
+    read choice
+    clear
+    choice=${choice:-N}  # Default to 'N'
+
+    if [[ "$choice" =~ ^[Yy]$ ]]; then
+        echo "Getting global IP..."
+        ipc=$(curl -s -m 6 ifconfig.me)
+        clear
+    fi
+
     if [ -n "$ipc" ]; then
         addresses[global]=$ipc
     else
@@ -163,7 +176,12 @@ get_ips() {
 }
 
 configure_prompt() {
-    fill_addresses
+    load_colors
+    
+    if [ "${#addresses[@]}" -eq 0 ]; then
+        fill_addresses
+    fi
+
     local ips=$(get_ips)
     local prompt_ips="${ips}"
 
@@ -177,14 +195,14 @@ configure_prompt() {
     case "$PROMPT_ALTERNATIVE" in
         twoline)
             #PROMPT=$'%F{%(#.blue.blue)}┌──${debian_chroot:+($debian_chroot)─}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))─}(%B%F{}%n'$prompt_symbol$'%m%b%F{%(#.blue.blue)})-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.blue)}]\n└─%B%(#.%F{red}#.%F{blue}$)%b%F{reset} '
-            PROMPT=$'%B%F{'$fadebar'}'$schars[333]$schars[262]$schars[261]$schars[260]$'%B%F{'$userhost$'}%K{'$userhost_bg$'}%n'$prompt_symbol$'%m%b%k%f%F{'$fadebar$'}%k'$schars[260]$schars[261]$schars[262]$schars[333]$'%b%f%k%F{'$fadebar$'}%k'$schars[333]$schars[262]$schars[261]$schars[260]$'%B%F{'$date$'}%k %D{%a %b %d} %D{%I:%M:%S%P}'$prompt_newline$'%B%F{'$cwd$'}%k%d>%b%f%k '
+            PROMPT=$'%B%F{'$fadebar'}'$schars[333]$schars[262]$schars[261]$schars[260]$'%B%F{'$userhost$'}%K{'$userhost_bg$'}%n'$prompt_symbol$'%m%B%k%f%F{'$fadebar$'}%k'$schars[260]$schars[261]$schars[262]$schars[333]$'%B%f%k%F{'$fadebar$'}%k'$schars[333]$schars[262]$schars[261]$schars[260]$'%B%F{'$date$'}%k %D{%a %b %d} %D{%I:%M:%S%P}'$prompt_newline$'%B%F{'$cwd$'}%k%d>%b%f%k '
             # Right-side prompt with exit codes and background processes
             RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.) '"%B%F{$fadebar}$schars[333]$schars[262]$schars[261]$schars[260]%b%F{$fadebar}%k $prompt_ips $schars[260]$schars[261]$schars[262]$schars[333]%F{$fadebar}%k$schars[333]$schars[262]$schars[261]$schars[260]%B%F{$fadebar}>%b%f%k "
             #RPROMPT=$prompt_ips$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
             ;;
         oneline)
             #PROMPT=$'${debian_chroot:+($debian_chroot)}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%B%F{%(#)}%n@%m%b%F{reset}:%B%F{%(#.blue.blue)}%~%b%F{reset}%(#.#.$) '
-            PROMPT=$'%B%F{'$fadebar'}'$schars[333]$schars[262]$schars[261]$schars[260]$'%B%F{'$userhost$'}%K{'$userhost_bg$'}%n'$prompt_symbol$'%m%B%k%f%F{'$fadebar$'}%k'$schars[260]$schars[261]$schars[262]$schars[333]$'%B%f%k%F{'$fadebar$'}%k'$schars[333]$schars[262]$schars[261]$schars[260]$'%B%F{'$date$'}%k %D{%a %b %d} %D{%I:%M:%S%P}'$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'$prompt_newline$'%b%f%k%F{'$fadebar$'}%k'$prompt_ips''$prompt_newline$'%B%F{'$cwd$'}%k%d>%b%f%k '
+            PROMPT=$'%B%F{'$fadebar'}'$schars[333]$schars[262]$schars[261]$schars[260]$'%B%F{'$userhost$'}%K{'$userhost_bg$'}%n'$prompt_symbol$'%m%B%k%f%F{'$fadebar$'}%k'$schars[260]$schars[261]$schars[262]$schars[333]$'%B%f%k%F{'$fadebar$'}%k'$schars[333]$schars[262]$schars[261]$schars[260]$'%B%F{'$date$'}%k %D{%a %b %d} %D{%I:%M:%S%P}'$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'$prompt_newline$'%b%f%k%F{'$fadebar$'}%k'$prompt_ips''$prompt_newline$'%B%F{'$cwd$'}%k%d${VIRTUAL_ENV:+ "%B%F{'$prompt_ips_color$'}($(basename $VIRTUAL_ENV))"}>%b%f%k '
             RPROMPT=
             ;;
         backtrack)
@@ -345,7 +363,7 @@ if [ -f /etc/zsh_command_not_found ]; then
     . /etc/zsh_command_not_found
 fi
 
-# custom aliases
+# custom functions and aliases
 # Make beep count like beep 100 and it will beep 100 times
 # --------------------------------------------------------- #
 
@@ -531,32 +549,6 @@ hack() {
 }
 ### HACKING STOP
 
-## MY ALIASES AND FUNCTIONS
-
-# cdh() {
-#     local history
-#     history=$(dirs -l -p | awk '!seen[$0]++' | tac)
-#     if [ -z "$history" ]; then
-#         echo "Directory history is empty."
-#     else
-#         echo "Directory history:"
-#         echo "$history" | nl -v 0
-#         if [ -n "$1" ]; then
-#             local index
-#             index=$(( $1 + 1 )) # Adjust index to account for nl numbering
-#             if [ $index -lt 0 ] || [ $index -ge $(echo "$history" | wc -l) ]; then
-#                 echo "Invalid index."
-#             else
-#                 cd "$(echo "$history" | sed -n "${index}p")"
-#             fi
-#         fi
-#     fi
-# }
-
-mvundo(){
-    # Undo the mv you just did
-}
-
 refresh_ip(){
     # Clear addresses associative array
     for key in ${(k)addresses}; do
@@ -566,14 +558,25 @@ refresh_ip(){
     configure_prompt
 }
 
-alert() {          
-    notify-send -u low --icon=/usr/share/icons/Flat-Remix-Blue-Dark/status/scalable/512/gtk-dialog-info.svg "ALERT" "$1" && paplay /usr/share/sounds/freedesktop/stereo/complete.oga
+alert() {
+    local message=$1
+    local num=${2:-1}
+    if ! [[ "$num" =~ ^[0-9]+$ ]]; then
+        echo "Error: Second argument must be a number"
+        return 1
+    fi
+
+    notify-send -u critical -t 0 --icon=/usr/share/icons/Flat-Remix-Blue-Dark/status/scalable/512/gtk-dialog-info.svg "ALERT" "$message"
+    for ((i=0; i<num; i++)); do
+        paplay --volume 65536 /usr/share/sounds/freedesktop/stereo/complete.oga
+    done
 }
+
 alias beep="paplay /usr/share/sounds/freedesktop/stereo/complete.oga"
 alias tools="cd $HOME/Tools"
 alias clip="xclip -selection clipboard -rmlastnl"
 
 # Added custom paths of binaries
-GOPATH=$HOME/.go
+GOPATH=$HOME/go
 YARNPATH=$HOME/.yarn
 PATH=$PATH:~/.local/bin:$GOPATH/bin:$YARNPATH/bin
