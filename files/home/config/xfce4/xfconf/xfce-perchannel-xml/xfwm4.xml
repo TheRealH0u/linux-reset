@@ -6,7 +6,7 @@
     <property name="theme" type="string" value="Mantis Dusk"/>
     <property name="title_font" type="string" value="Fira Code Medium 10"/>
     <property name="easy_click" type="empty"/>
-    <property name="workspace_count" type="empty"/>
+    <property name="workspace_count" type="int" value="4"/>
     <property name="cycle_workspaces" type="bool" value="true"/>
     <property name="scroll_workspaces" type="bool" value="false"/>
     <property name="wrap_windows" type="empty"/>

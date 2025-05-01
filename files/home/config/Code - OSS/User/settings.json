@@ -11,7 +11,7 @@
         "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
     },
     "[php]": {
-        "editor.defaultFormatter": "StoilDobreff.php-resolver"
+        "editor.defaultFormatter": "lkrms.pretty-php"
     },
     "cSpell.userWords": [
         "padit",
