@@ -18,6 +18,6 @@ cp ./files/etc/profile /etc/profile
 cp -r ./files/home/config/. /home/kali/.config/
 ## ./files/home/zshrc -> /home/kali/.zshrc
 cp ./files/home/zshrc /home/kali/.zshrc
-mkdir /home/kali/.hacking
+mkdir -p /home/kali/.hacking
 ## ./files/home/zshrc -> /root/.zshrc
 cp ./files/home/zshrc /root/.zshrc
