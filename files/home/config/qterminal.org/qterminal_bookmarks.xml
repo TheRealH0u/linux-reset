@@ -42,4 +42,7 @@
     <command name="PID more info" value='echo -n "PID: "; read PID &amp;&amp; sudo ps -f -p "$PID"; unset PID'/>
     <command name="PID cwd" value='echo -n "PID: "; read PID &amp;&amp; sudo ls -l "/proc/$PID/cwd"; unset PID'/>
   </group>
+  <group name="Misc">
+    <command name="Get Ports from Scan" value='echo -n "File: "; read FILE &amp;&amp; cat "$FILE" | grep -oP "^\d+(?=/tcp)"; unset FILE'/>
+  </group>
 </qterminal>
