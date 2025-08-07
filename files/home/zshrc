@@ -577,6 +577,16 @@ alias tools="cd $HOME/Tools"
 alias clip="xclip -selection clipboard -rmlastnl"
 
 # Added custom paths of binaries
-GOPATH=$HOME/go
 YARNPATH=$HOME/.yarn
-PATH=$PATH:~/.local/bin:$GOPATH/bin:$YARNPATH/bin
+PATH=$PATH:~/.local/bin:$YARNPATH/bin
+
+# Sources
+#source /etc/profile.d/go.sh
+
+#sudo nano /etc/profile.d/go.sh
+#export PATH=$PATH:/usr/local/go/bin
+#export GOPATH=/usr/local/go-workspace
+#export PATH=$PATH:$GOPATH/bin
+#sudo mkdir -p /usr/local/go-workspace
+#sudo chmod -R 777 /usr/local/go-workspace
+#sudo chmod +x /etc/profile.d/go.sh
